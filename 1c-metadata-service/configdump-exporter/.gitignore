@@ -1,0 +1,9 @@
+dist/*
+!dist/README.md
+build/*
+!build/.gitkeep
+out/*
+!out/.gitkeep
+work/*
+!work/.gitkeep
+.env

@@ -1,0 +1,9 @@
+services:
+  onec-metadata-explorer-mfe:
+    image: nginx:1.27-alpine
+    ports:
+      - "${ONEC_MFE_PORT:-3002}:80"
+    volumes:
+      - ../../onec-metadata-explorer-mfe/dist:/usr/share/nginx/html:ro
+    profiles:
+      - mfe

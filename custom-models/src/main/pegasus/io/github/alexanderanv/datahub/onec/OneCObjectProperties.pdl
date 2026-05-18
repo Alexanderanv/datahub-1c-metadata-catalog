@@ -1,0 +1,98 @@
+namespace io.github.alexanderanv.datahub.onec
+
+/**
+ * Общие доменные поля любого объекта конфигурации 1С:Предприятие.
+ *
+ * Крепится к стандартному entityType `dataset` и хранит те свойства, которые
+ * применимы к любому виду объекта 1С (Справочник, Документ, Регистр и т.п.).
+ * Видо-специфичные поля вынесены в отдельные аспекты: OneCCatalogProperties,
+ * OneCDocumentProperties, OneCRegisterProperties.
+ *
+ * Имя аспекта с префиксом `oneC` — чтобы не пересекаться со стандартным
+ * namespace DataHub. Регистрация — в `registry/entity-registry.yml`.
+ *
+ * Обратная совместимость: все новые поля добавляются как optional.
+ */
+@Aspect = {
+  "name": "oneCObjectProperties",
+  "autoRender": true,
+  "renderSpec": {
+    "displayType": "properties",
+    "displayName": "Properties 1C"
+  }
+}
+record OneCObjectProperties {
+
+  /**
+   * Вид объекта 1С: "Константа", "Справочник", "Документ",
+   * "ПланВидовХарактеристик", "ПланСчетов", "ПланВидовРасчета",
+   * "РегистрСведений", "РегистрНакопления", "РегистрБухгалтерии",
+   * "РегистрРасчета", "Перечисление", "ТабличнаяЧасть".
+   * Хранится в RU-форме единственного числа (как в самом имени объекта
+   * в URN, часть до точки для EN-словаря — см. mapping/urn.py).
+   */
+  objectKind: string
+
+  /**
+   * Полное display-имя объекта в русских терминах 1С:
+   * "Документ.ПоступлениеТоваров".
+   * Внешний API `1c-metadata-service` использует canonical English full name
+   * (`Document.ПоступлениеТоваров`), а этот aspect хранит пользовательское
+   * представление для вкладки Properties 1C. Canonical full name сохраняется
+   * отдельно в DatasetProperties.customProperties.canonicalFullName.
+   */
+  fullName: string
+
+  /**
+   * Синоним объекта (поле "Синоним" в конфигураторе 1С) — пользовательское
+   * отображаемое имя. Используется UI-плагином как label для вкладки.
+   */
+  synonym: optional string
+
+  /**
+   * Комментарий к объекту (поле "Комментарий" в 1С). Плагин в UI также
+   * кладёт эту строку в стандартный `editableDatasetProperties.description`,
+   * здесь — оригинал без редактирования.
+   */
+  comment: optional string
+
+  /**
+   * Стабильное техническое имя информационной базы / конфигурации 1С, из
+   * которой приехал объект (например, "erp-prod"). Используется для
+   * диспетчеризации siblings и расфасовки источников при нескольких базах 1С
+   * в одном DataHub. Человекочитаемая подпись ИБ хранится только на
+   * infobase-контейнере в ContainerProperties.name.
+   */
+  configurationName: optional string
+
+  /**
+   * Стабильный UUID объекта метаданных 1С из ConfigDumpInfo.xml
+   * (Метаданные.<...>.УникальныйИдентификатор()). Дублирует UUID из URN
+   * для GraphQL, UI-плагина и поиска по аспектам.
+   *
+   * Формат: lowercase, с дефисами (как в самом ConfigDumpInfo.xml).
+   * optional исключительно ради backward-compatibility со старыми записями
+   * аспекта; новые ingest-прогоны всегда заполняют это поле.
+   */
+  metadataUuid: optional string
+
+  /**
+   * UUID родительского объекта 1С для табличной части.
+   *
+   * Заполняется только когда objectKind="ТабличнаяЧасть". Нужен UI/MFE и
+   * GraphQL-клиентам, чтобы без парсинга составного dataset URN понять,
+   * какому объекту принадлежит табличная часть. Для обычных объектов
+   * отсутствует.
+   */
+  parentObjectUuid: optional string
+
+  /**
+   * Маппинг "транслитерированный fieldPath реквизита → UUID реквизита".
+   * Заполняется только для пользовательских реквизитов (role≠"standard"),
+   * у которых UUID известен в загруженном ConfigDumpInfo.xml.
+   *
+   * Используется UI-плагином и GraphQL-клиентами для сопоставления
+   * SchemaField.fieldPath с UUID реквизита.
+   */
+  attributesUuidMap: optional map[string, string]
+}

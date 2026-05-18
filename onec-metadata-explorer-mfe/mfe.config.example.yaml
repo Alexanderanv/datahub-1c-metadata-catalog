@@ -1,0 +1,11 @@
+subNavigationMode: false
+microFrontends:
+  - id: onec-metadata-explorer
+    label: 1C Metadata Explorer
+    path: /onec-metadata-explorer
+    remoteEntry: http://localhost:3002/remoteEntry.js
+    module: onecMetadataExplorerMFE/mount
+    flags:
+      enabled: true
+      showInNav: true
+    navIcon: Database

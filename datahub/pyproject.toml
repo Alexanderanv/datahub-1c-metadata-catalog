@@ -1,0 +1,67 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "acryl-datahub-1c-source"
+version = "0.1.2"
+description = "DataHub source plugin for 1C:Enterprise metadata"
+requires-python = ">=3.11,<3.12"
+authors = [
+    { name = "alexanderanv" },
+]
+readme = "README.md"
+license = { text = "Apache-2.0" }
+
+dependencies = [
+    "acryl-datahub>=1.5.0,<1.6.0",
+    "pydantic>=2.0,<3.0",
+    "PyYAML>=6.0,<7.0",
+    "requests>=2.31,<3.0",
+    "expandvars>=0.6.5,<2.0.0",
+    "cyrtranslit==1.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0,<9.0",
+    "pytest-cov>=4.1,<5.0",
+    "pytest-httpserver>=1.0,<2.0",
+    "mypy>=1.8,<2.0",
+    "ruff>=0.4,<1.0",
+    # Newer types-requests releases depend on urllib3>=2, while acryl-datahub
+    # 1.5.x still pulls packages requiring urllib3<1.27.
+    "types-requests==2.31.0.6",
+    "types-PyYAML>=6.0,<7.0",
+]
+# Опциональная зависимость: стандартный postgres-коннектор DataHub.
+# Нужен, если используется PostgreSQL recipe из `examples/recipes`.
+# Реальные типы PG-колонок дотягиваются на те же URN, что эмитит наш
+# 1С-плагин. Установка: `pip install -e ".[postgres]"`.
+postgres = [
+    "acryl-datahub[postgres]>=1.5.0,<1.6.0",
+]
+
+[project.entry-points."datahub.ingestion.source.plugins"]
+"1c-enterprise" = "datahub_1c.source:OneCSource"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/datahub_1c"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --strict-markers"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_ignores = true

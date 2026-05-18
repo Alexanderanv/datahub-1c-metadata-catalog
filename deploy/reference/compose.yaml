@@ -1,0 +1,17 @@
+services:
+  ingestion-runner:
+    build:
+      context: ../..
+      dockerfile: deploy/reference/ingestion/Dockerfile
+    env_file:
+      - path: .env.example
+        required: true
+      - path: .env
+        required: false
+    environment:
+      ONEC_RECIPE: /app/examples/recipes/1c-full.dhub.yaml
+      DB_RECIPE: /app/examples/recipes/db-postgres.dhub.yaml
+    volumes:
+      - ${CONFIGDUMP_DIR:-./configdump}:/configdump:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

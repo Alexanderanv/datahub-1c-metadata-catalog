@@ -1,0 +1,89 @@
+namespace io.github.alexanderanv.datahub.onec
+
+import com.linkedin.common.Urn
+
+/**
+ * Аспект-контейнер для типизированных доменных отношений 1С.
+ *
+ * Каждое поле — массив URN с аннотацией `@Relationship`, что превращает его
+ * в индексируемое графовое ребро. Имена отношений (`HasTabularPart`,
+ * `IsTabularPartOf`, `MapsToDbTable`, `RefersToObject`, `IsReferencedByObject`)
+ * становятся значениями для GraphQL-фильтра `relationships(types: [...])`.
+ *
+ * **Важно**: ни одно поле не помечено `isLineage: true`. Доменные
+ * навигационные рёбра не должны засорять стандартный Lineage-граф DataHub;
+ * их визуализация — дело отдельной MFE-страницы.
+ *
+ * Обратная совместимость: добавление новых `@Relationship`-полей не ломает
+ * старые ingestion pipelines (новое поле инициализируется пустым массивом).
+ */
+@Aspect = {
+  "name": "oneCDomainRelationships"
+}
+record OneCDomainRelationships {
+
+  /**
+   * Ссылки на табличные части данного объекта (Документ/Справочник/ПВХ → ТЧ).
+   * На каждой ТЧ зеркально эмитится `isTabularPartOf`, указывающий на родителя.
+   */
+  @Relationship = {
+    "/*": {
+      "name": "HasTabularPart",
+      "entityTypes": [ "dataset" ]
+    }
+  }
+  hasTabularPart: array[Urn] = [ ]
+
+  /**
+   * Обратное ребро — от табличной части к родительскому объекту.
+   * Всегда содержит ровно один URN (у ТЧ единственный родитель);
+   * массив используется для единообразия формата `@Relationship`-полей.
+   */
+  @Relationship = {
+    "/*": {
+      "name": "IsTabularPartOf",
+      "entityTypes": [ "dataset" ]
+    }
+  }
+  isTabularPartOf: array[Urn] = [ ]
+
+  /**
+   * Маппинг логического 1С-датасета на физический dataset таблицы СУБД.
+   * Если стандартные DataHub Siblings включены, дополняет их типизированной
+   * семантикой. Если `ingestion.emit_db_siblings=false`, остаётся основной
+   * DB-neutral связью для MFE и GraphQL-клиентов.
+   */
+  @Relationship = {
+    "/*": {
+      "name": "MapsToDbTable",
+      "entityTypes": [ "dataset" ]
+    }
+  }
+  mapsToDbTable: array[Urn] = [ ]
+
+  /**
+   * Исходящие ссылочные связи (объект-источник → объект-цель).
+   * Эмитится source-плагином по данным `/references?level=tables`.
+   * Без isLineage — это *навигация по справочной модели*, а не lineage
+   * потока данных (lineage по колонкам — через FineGrainedLineage).
+   */
+  @Relationship = {
+    "/*": {
+      "name": "RefersToObject",
+      "entityTypes": [ "dataset" ]
+    }
+  }
+  refersToObject: array[Urn] = [ ]
+
+  /**
+   * Входящие ссылочные связи (зеркальное ребро от цели к источнику).
+   * Нужно для вкладки "Используется в".
+   */
+  @Relationship = {
+    "/*": {
+      "name": "IsReferencedByObject",
+      "entityTypes": [ "dataset" ]
+    }
+  }
+  isReferencedByObject: array[Urn] = [ ]
+}

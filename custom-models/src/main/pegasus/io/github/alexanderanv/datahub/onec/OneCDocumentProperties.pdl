@@ -1,0 +1,35 @@
+namespace io.github.alexanderanv.datahub.onec
+
+/**
+ * Видо-специфичные свойства документа 1С.
+ *
+ * Заполняется только для datasets с SubType `Document`.
+ */
+@Aspect = {
+  "name": "oneCDocumentProperties"
+}
+record OneCDocumentProperties {
+
+  /**
+   * Признак "Проведение разрешено" в конфигураторе.
+   * Отличается от SchemaField `Posted` (стандартный реквизит) тем, что
+   * это *свойство метаданных документа*, а не значение в конкретной записи.
+   */
+  isPostable: optional boolean
+
+  /**
+   * Имя нумератора, если документ использует общий нумератор.
+   */
+  numeratorName: optional string
+
+  /**
+   * Периодичность нумерации: "ВПределахГода", "ВПределахМесяца",
+   * "ВПределахДня", "Непериодическая" и т.п.
+   */
+  numberingPeriodicity: optional string
+
+  /**
+   * Длина номера документа (поле "ДлинаНомера" в 1С).
+   */
+  numberLength: optional int
+}

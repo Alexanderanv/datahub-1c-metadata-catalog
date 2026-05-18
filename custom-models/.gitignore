@@ -1,0 +1,7 @@
+.gradle/
+build/
+bin/
+src/mainGeneratedDataTemplate/
+src/testGeneratedDataTemplate/
+*.iml
+.idea/

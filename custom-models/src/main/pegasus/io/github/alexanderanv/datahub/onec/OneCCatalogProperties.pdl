@@ -1,0 +1,48 @@
+namespace io.github.alexanderanv.datahub.onec
+
+/**
+ * Видо-специфичные свойства catalog-like объектов 1С: справочников,
+ * планов видов характеристик, планов счетов и планов видов расчета.
+ *
+ * Заполняется только для datasets с catalog-like SubType (`Catalog`,
+ * `Characteristic Plan`, `Chart of Accounts`, `Chart of Calculation Types`).
+ * Все поля optional — источник в 1С может их не отдать, а у некоторых видов
+ * справочников (подчинённых, простых) часть полей не применима.
+ */
+@Aspect = {
+  "name": "oneCCatalogProperties"
+}
+record OneCCatalogProperties {
+
+  /**
+   * Признак иерархичности справочника.
+   */
+  isHierarchical: optional boolean
+
+  /**
+   * Вид иерархии: "HierarchyFoldersAndItems" или "HierarchyOfItems".
+   * Осмысленно только при isHierarchical=true.
+   */
+  hierarchyKind: optional string
+
+  /**
+   * Есть ли у справочника владелец (подчинённый справочник).
+   */
+  hasOwner: optional boolean
+
+  /**
+   * Полные имена объектов-владельцев в 1С ("Справочник.Контрагенты"),
+   * если hasOwner=true.
+   */
+  ownerNames: optional array[string]
+
+  /**
+   * Длина кода элемента (поле "ДлинаКода" в 1С).
+   */
+  codeLength: optional int
+
+  /**
+   * Длина наименования элемента (поле "ДлинаНаименования" в 1С).
+   */
+  descriptionLength: optional int
+}

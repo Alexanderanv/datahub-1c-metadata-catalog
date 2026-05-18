@@ -1,0 +1,22 @@
+services:
+  configdump-exporter:
+    image: ${ONEC_CONFIGDUMP_IMAGE:-ghcr.io/alexanderanv/onec-configdump-exporter:${ONEC_VERSION:-8.3.27.1936}}
+    build:
+      context: ../../1c-metadata-service/configdump-exporter
+      args:
+        ONEC_VERSION: ${ONEC_VERSION:-8.3.27.1936}
+        BASE_IMAGE: ${BASE_IMAGE:-debian:12-slim}
+        ONEC_UID: ${ONEC_UID:-1000}
+        ONEC_GID: ${ONEC_GID:-1000}
+    env_file:
+      - path: .env.example
+        required: true
+      - path: .env
+        required: false
+    volumes:
+      - ${CONFIGDUMP_DIR:-./configdump}:/out
+      - ${CONFIGDUMP_WORK_DIR:-./configdump-work}:/work
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    profiles:
+      - configdump

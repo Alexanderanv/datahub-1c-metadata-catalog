@@ -1,0 +1,28 @@
+source:
+  type: postgres
+  config:
+    host_port: ${POSTGRES_HOST_PORT}
+    database: ${POSTGRES_DATABASE:-${ONEC_INFOBASE_NAME}}
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+    env: ${DATAHUB_ENV:-DEV}
+
+    schema_pattern:
+      allow:
+        - "${POSTGRES_SCHEMA:-public}"
+
+    # Заполняется скриптом datahub/scripts/reference_ingest.py из 1C
+    # /db-mapping. Безопасное значение по умолчанию не выбирает таблицы,
+    # если recipe запущен напрямую.
+    table_pattern:
+      allow:
+        - "${POSTGRES_TABLE_PATTERN_ALLOW:-(?!)}"
+
+    profiling:
+      enabled: ${POSTGRES_PROFILING_ENABLED:-false}
+
+sink:
+  type: datahub-rest
+  config:
+    server: ${DATAHUB_GMS_URL}
+    token: ${DATAHUB_GMS_TOKEN:-}

@@ -1,0 +1,1016 @@
+openapi: 3.1.0
+info:
+  title: 1C:Enterprise Metadata REST API
+  description: |
+    REST API сервиса метаданных 1С:Предприятие.
+    Предоставляет информацию об объектах конфигурации 1С, их реквизитах,
+    связях и маппинге на физические таблицы/колонки используемой СУБД.
+
+    Во внешнем контракте виды объектов 1С задаются canonical English names
+    из терминологии платформы 1С: `Constants`, `Catalogs`, `Documents`,
+    `ChartsOfCharacteristicTypes`, `ChartsOfAccounts`,
+    `ChartsOfCalculationTypes`, `InformationRegisters`,
+    `AccumulationRegisters`, `AccountingRegisters`,
+    `CalculationRegisters`, `Enums`. Полные имена объектов в API
+    также используют английский singular-префикс (`Document.ЗаказКлиента`).
+    Пользовательские display names и `synonym` остаются русскими, если они
+    русские в конфигурации 1С.
+
+    Реализуется как расширение конфигурации 1С и публикуется через HTTP-сервис.
+    API отдаёт только метаданные основной конфигурации. Метаданные, добавленные
+    расширениями, скрываются, потому что стабильные UUID берутся из
+    ConfigDumpInfo.xml основной конфигурации.
+    Аутентификация — стандартная Basic Auth 1С.
+  version: 1.0.0
+
+servers:
+  - url: http://1c-host/1c-test/hs/metadataservice
+    description: Тестовый сервер 1С
+
+security:
+  - basicAuth: []
+
+paths:
+  /health:
+    get:
+      operationId: healthCheck
+      summary: Проверка доступности сервиса
+      description: Возвращает статус работоспособности REST API.
+      security: []
+      responses:
+        "200":
+          description: Сервис доступен
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+
+  /objects:
+    get:
+      operationId: listObjects
+      summary: Список объектов метаданных
+      description: |
+        Возвращает список объектов конфигурации 1С.
+        Поддерживает фильтрацию по видам объектов.
+      parameters:
+        - name: types
+          in: query
+          required: false
+          description: |
+            Фильтр по видам объектов (через запятую).
+            Допустимые значения: Constants, Catalogs, Documents,
+            ChartsOfCharacteristicTypes, ChartsOfAccounts,
+            ChartsOfCalculationTypes, InformationRegisters,
+            AccumulationRegisters, AccountingRegisters,
+            CalculationRegisters, Enums.
+          schema:
+            type: string
+            example: "Catalogs,Documents"
+      responses:
+        "200":
+          description: Список объектов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MetadataObjectSummary"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /objects/{type}/{name}:
+    get:
+      operationId: getObjectDetails
+      summary: Детальная информация об объекте
+      description: |
+        Возвращает информацию об объекте метаданных 1С
+        включая список реквизитов с типами.
+      parameters:
+        - $ref: "#/components/parameters/ObjectType"
+        - $ref: "#/components/parameters/ObjectName"
+      responses:
+        "200":
+          description: Детали объекта
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MetadataObjectDetail"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /objects/{type}/{name}/tabular-parts:
+    get:
+      operationId: getTabularParts
+      summary: Табличные части объекта
+      description: |
+        Возвращает список табличных частей объекта 1С
+        с их реквизитами.
+      parameters:
+        - $ref: "#/components/parameters/ObjectType"
+        - $ref: "#/components/parameters/ObjectName"
+      responses:
+        "200":
+          description: Табличные части
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TabularPart"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+  /references:
+    get:
+      operationId: getReferences
+      summary: Связи между объектами
+      description: |
+        Возвращает список связей между объектами метаданных.
+        Каждая связь указывает, что один объект ссылается на другой.
+        При наличии параметра level=columns возвращает детализацию
+        до уровня конкретных реквизитов.
+
+        Это структурные ссылочные связи 1С, а не классический data-flow
+        lineage: наличие ссылочного реквизита не означает, что данные
+        были созданы, преобразованы или записаны из одного объекта в другой.
+
+        Для больших конфигураций рекомендуется передавать `objects` —
+        список полных имён объектов, которые реально загружаются в DataHub.
+        Тогда API вернёт только связи между объектами из этого списка.
+      parameters:
+        - name: types
+          in: query
+          required: false
+          description: Фильтр по видам объектов-источников (через запятую).
+          schema:
+            type: string
+        - name: objects
+          in: query
+          required: false
+          description: |
+            Фильтр по полным именам объектов 1С (через запятую), например
+            `Document.ЗаказПокупателя,Catalog.Номенклатура`.
+            Если задан, возвращаются только связи, где и объект-источник,
+            и объект-цель входят в этот список. Используется DataHub source,
+            чтобы не выгружать лишние связи для объектов, не включённых
+            в текущий ingestion.
+          schema:
+            type: string
+        - name: level
+          in: query
+          required: false
+          description: |
+            Уровень детализации связей:
+            - tables — только связи между объектами (по умолчанию)
+            - columns — с указанием конкретных реквизитов
+          schema:
+            type: string
+            enum: [tables, columns]
+            default: tables
+      responses:
+        "200":
+          description: Связи
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Reference"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /lineage:
+    get:
+      operationId: getLineage
+      summary: Потоки данных между объектами
+      description: |
+        Возвращает dataset-level lineage между объектами 1С: поток данных
+        от upstream-объекта к downstream-объекту.
+
+        Эндпойнт предназначен для построения стандартного DataHub
+        `UpstreamLineage` и не заменяет `/references`.
+        В отличие от `/references`, здесь возвращаются только связи,
+        отражающие создание, запись или производность данных:
+
+        - `basis` — объект создан вводом на основании другого объекта;
+        - `register_movement` — документ делает движения по регистру;
+        - `selection_criterion` — связь через критерий отбора;
+        - `manual_dataset_flow` — ручная внутренняя dataset-level связь,
+          заданная в 1С через программный интерфейс manual lineage.
+
+        Ответ описывает только уровень датасетов. Column-level lineage
+        должен строиться отдельной логикой, если API сможет отдать
+        соответствие конкретных реквизитов/измерений/ресурсов.
+      parameters:
+        - name: objects
+          in: query
+          required: false
+          description: |
+            Фильтр по полным именам объектов 1С (через запятую), например
+            `Document.ЗаказКлиента,AccountingRegister.Управленческий`.
+            Если задан, возвращаются только связи, где и upstream-объект,
+            и downstream-объект входят в этот список. Используется
+            DataHub source, чтобы не выгружать лишний lineage для объектов,
+            не включённых в текущий ingestion.
+          schema:
+            type: string
+        - name: kinds
+          in: query
+          required: false
+          description: |
+            Фильтр по типам lineage-связей (через запятую).
+            Допустимые значения: basis, register_movement,
+            selection_criterion, manual_dataset_flow.
+          schema:
+            type: string
+            example: "basis,register_movement,manual_dataset_flow"
+      responses:
+        "200":
+          description: Потоки данных между объектами 1С
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/LineageEdge"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /integration-services:
+    get:
+      operationId: getIntegrationServices
+      summary: HTTP/Web-сервисы 1С
+      description: |
+        Возвращает metadata HTTP-сервисов и Web-сервисов 1С: сервисы,
+        URL-шаблоны, методы, операции и параметры. Эндпойнт предназначен
+        для эмиссии DataHub `DataFlow`/`DataJob`.
+
+        Runtime-сервис 1С не знает внешних потребителей endpoint-ов и не
+        возвращает outputs. Внутренние `input_objects`, если заданы через
+        manual extension point, являются только 1С-внутренними metadata hints,
+        а не полным `DataJobInputOutput`.
+      parameters:
+        - name: types
+          in: query
+          required: false
+          description: |
+            Фильтр по видам сервисов через запятую.
+            Допустимые значения: HTTPServices, WebServices.
+          schema:
+            type: string
+            example: "HTTPServices,WebServices"
+        - name: services
+          in: query
+          required: false
+          description: |
+            Фильтр по canonical full names сервисов через запятую:
+            `HTTPService.OrdersApi,WebService.Exchange`.
+          schema:
+            type: string
+        - name: endpoints
+          in: query
+          required: false
+          description: |
+            Фильтр по canonical full names endpoint-ов через запятую:
+            `HTTPService.X.URLTemplate.Y.Method.Z` или
+            `WebService.X.Operation.Y`.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Список интеграционных сервисов и endpoint-ов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/IntegrationService"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+  /db-mapping/{type}/{name}:
+    get:
+      operationId: getDbMapping
+      summary: Маппинг объекта 1С на физические таблицы СУБД
+      description: |
+        Возвращает физическую структуру хранения 1С-объекта: список
+        таблиц СУБД (основная, табличные части, итоги регистров) и
+        для каждой таблицы — соответствие реквизитов 1С колонкам.
+        Конкретная СУБД не подразумевается — 1С может быть развёрнута
+        на PostgreSQL, MS SQL или Oracle. Имена таблиц/колонок
+        возвращаются как они хранятся платформой 1С (с системными
+        префиксами вроде `_Reference42` / `_Fld142`).
+
+        Реализация: BSL-сервис вызывает
+        `ПолучитьСтруктуруХраненияБазыДанных(<объект>, Истина)` и
+        фильтрует по поддерживаемым назначениям таблиц
+        (`Main`/`TabularSection`/`Totals`/`TotalsSliceFirst`/
+        `TotalsSliceLast`); неизвестные назначения молча пропускаются.
+      parameters:
+        - $ref: "#/components/parameters/ObjectType"
+        - $ref: "#/components/parameters/ObjectName"
+      responses:
+        "200":
+          description: Маппинг объекта на физические таблицы СУБД
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DbMapping"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: Стандартная аутентификация 1С (логин/пароль пользователя ИБ)
+
+  parameters:
+    ObjectType:
+      name: type
+      in: path
+      required: true
+      description: |
+        Вид объекта 1С в canonical English plural форме:
+        Constants, Catalogs, Documents, ChartsOfCharacteristicTypes,
+        ChartsOfAccounts, ChartsOfCalculationTypes, InformationRegisters,
+        AccumulationRegisters, AccountingRegisters, CalculationRegisters, Enums.
+      schema:
+        type: string
+        enum:
+          - Constants
+          - Catalogs
+          - Documents
+          - ChartsOfCharacteristicTypes
+          - ChartsOfAccounts
+          - ChartsOfCalculationTypes
+          - InformationRegisters
+          - AccumulationRegisters
+          - AccountingRegisters
+          - CalculationRegisters
+          - Enums
+        example: "Catalogs"
+    ObjectName:
+      name: name
+      in: path
+      required: true
+      description: Имя объекта метаданных 1С.
+      schema:
+        type: string
+        example: "Номенклатура"
+
+  responses:
+    Unauthorized:
+      description: Ошибка аутентификации
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+    NotFound:
+      description: Объект не найден
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Error"
+
+  schemas:
+    HealthResponse:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
+          enum: [ok]
+          example: ok
+        version:
+          type: string
+          description: Версия расширения API
+          example: "1.0.0"
+
+    MetadataObjectSummary:
+      type: object
+      required: [object_type, name, full_name]
+      properties:
+        object_type:
+          type: string
+          description: Вид объекта 1С в canonical English plural форме.
+          example: "Catalogs"
+        name:
+          type: string
+          description: Имя объекта в конфигурации
+          example: "Номенклатура"
+        full_name:
+          type: string
+          description: |
+            Каноническое полное имя объекта в метаданных 1С.
+            Используется для сопоставления со ссылочными типами атрибутов:
+            full_name `Catalog.Номенклатура` соответствует ссылочному
+            типу реквизита на объект `Номенклатура`. Внутреннее русское
+            `ПолноеИмя()` 1С нормализуется на границе API.
+          example: "Catalog.Номенклатура"
+        synonym:
+          type: string
+          description: Синоним (пользовательское представление)
+          example: "Номенклатура"
+
+    MetadataObjectDetail:
+      type: object
+      required: [object_type, name, full_name, attributes]
+      properties:
+        object_type:
+          type: string
+          description: Вид объекта 1С в canonical English plural форме.
+          example: "Catalogs"
+        name:
+          type: string
+          description: Имя объекта
+          example: "Номенклатура"
+        full_name:
+          type: string
+          description: Каноническое полное имя объекта в метаданных 1С.
+          example: "Catalog.Номенклатура"
+        synonym:
+          type: string
+          description: Синоним
+          example: "Номенклатура"
+        comment:
+          type: string
+          description: Комментарий, заполненный в конфигураторе 1С.
+        attributes:
+          type: array
+          description: Реквизиты объекта
+          items:
+            $ref: "#/components/schemas/Attribute"
+        catalog_properties:
+          $ref: "#/components/schemas/CatalogProperties"
+        document_properties:
+          $ref: "#/components/schemas/DocumentProperties"
+        register_properties:
+          $ref: "#/components/schemas/RegisterProperties"
+
+    CatalogProperties:
+      type: object
+      description: |
+        Видо-специфичные свойства справочника и catalog-like планов 1С.
+        Возвращается, если object_type ∈ {Catalogs,
+        ChartsOfCharacteristicTypes, ChartsOfAccounts,
+        ChartsOfCalculationTypes}.
+        Все поля опциональны: 1С может их не отдавать (например, плоский справочник).
+      properties:
+        is_hierarchical:
+          type: boolean
+          description: Признак иерархического справочника.
+        hierarchy_kind:
+          type: string
+          description: |
+            Вид иерархии:
+            - HierarchyFoldersAndItems — иерархия групп и элементов;
+            - HierarchyOfItems — иерархия только элементов.
+          enum: [HierarchyFoldersAndItems, HierarchyOfItems]
+        has_owner:
+          type: boolean
+          description: Признак подчинённого справочника (имеет Владельца).
+        owner_names:
+          type: array
+          description: Канонические полные имена справочников-владельцев (Catalog.X).
+          items:
+            type: string
+        code_length:
+          type: integer
+          description: Максимальная длина поля Код.
+        description_length:
+          type: integer
+          description: Максимальная длина поля Наименование.
+
+    DocumentProperties:
+      type: object
+      description: Видо-специфичные свойства документа.
+      properties:
+        is_postable:
+          type: boolean
+          description: Признак «Проведение разрешено».
+        numerator_name:
+          type: string
+          description: Имя нумератора (общий нумератор документов), если задан.
+        numbering_periodicity:
+          type: string
+          description: |
+            Периодичность нумерации:
+            - NonPeriodical — сквозная;
+            - Year / Quarter / Month / Day — с перезапуском.
+          enum: [NonPeriodical, Year, Quarter, Month, Day]
+        number_length:
+          type: integer
+          description: Максимальная длина номера документа.
+
+    RegisterProperties:
+      type: object
+      description: |
+        Видо-специфичные свойства регистра 1С.
+        Поле register_kind дублирует object_type для удобства UI-плагина.
+      required:
+        - register_kind
+      properties:
+        register_kind:
+          type: string
+          description: |
+            Вид регистра:
+            - Information — регистр сведений;
+            - Accumulation — регистр накоплений;
+            - Accounting — регистр бухгалтерии;
+            - Calculation — регистр расчета.
+          enum: [Information, Accumulation, Accounting, Calculation]
+        periodicity:
+          type: string
+          description: |
+            Периодичность регистра сведений:
+            - NonPeriodical — непериодический;
+            - Second / Minute / Hour / Day / Month / Quarter / Year.
+          enum: [NonPeriodical, Second, Minute, Hour, Day, Month, Quarter, Year]
+        write_mode:
+          type: string
+          description: |
+            Режим записи регистра сведений:
+            - Independent — независимый;
+            - RecorderSubordinate — подчинённый регистратору.
+          enum: [Independent, RecorderSubordinate]
+        totals_enabled:
+          type: boolean
+          description: Признак использования итогов (регистр накоплений).
+
+    Attribute:
+      type: object
+      required: [name, types]
+      properties:
+        name:
+          type: string
+          description: Имя реквизита
+          example: "Наименование"
+        synonym:
+          type: string
+          description: Синоним реквизита
+          example: "Наименование"
+        types:
+          type: array
+          description: |
+            Массив типов данных реквизита в 1С.
+            Для простого типа — один элемент, для составного — несколько.
+          items:
+            $ref: "#/components/schemas/AttributeType"
+        max_length:
+          type: integer
+          description: Максимальная длина (для строковых типов)
+          example: 150
+        role:
+          type: string
+          description: |
+            Роль реквизита в объекте:
+            - standard — стандартный реквизит (Код, Наименование, Ссылка и т.д.)
+            - attribute — пользовательский реквизит
+            - dimension — измерение регистра
+            - resource — ресурс регистра
+          enum: [standard, attribute, dimension, resource]
+          default: attribute
+
+    AttributeType:
+      type: object
+      required: [name, is_reference]
+      properties:
+        name:
+          type: string
+          description: |
+            Имя типа данных.
+            Для примитивных: Строка, Число, Дата, Булево и т.д.
+            Для ссылочных: каноническое полное имя объекта метаданных
+            (напр. Catalog.Номенклатура).
+          example: "Строка"
+        is_reference:
+          type: boolean
+          description: Является ли тип ссылочным (ссылка на объект метаданных)
+
+    TabularPart:
+      type: object
+      required: [name, attributes]
+      properties:
+        name:
+          type: string
+          description: Имя табличной части
+          example: "Состав"
+        synonym:
+          type: string
+          description: Синоним табличной части
+          example: "Состав"
+        attributes:
+          type: array
+          description: Реквизиты табличной части
+          items:
+            $ref: "#/components/schemas/Attribute"
+
+    Reference:
+      type: object
+      description: |
+        Структурная ссылочная связь между объектами 1С. Описывает,
+        что реквизит, измерение, ресурс или реквизит табличной части
+        одного объекта имеет ссылочный тип на другой объект. Не является
+        классическим data-flow lineage.
+
+        Технический стандартный реквизит `Ссылка`, тип которого указывает
+        на сам объект-источник, не возвращается: это идентификатор текущей
+        записи, а не доменная связь объекта с самим собой.
+      required: [source_object_type, source_name, target_object_type, target_name]
+      properties:
+        source_object_type:
+          type: string
+          description: Вид объекта-источника в canonical English plural форме.
+          example: "Documents"
+        source_name:
+          type: string
+          description: Имя объекта-источника
+          example: "ПоступлениеТоваров"
+        target_object_type:
+          type: string
+          description: Вид объекта-цели в canonical English plural форме.
+          example: "Catalogs"
+        target_name:
+          type: string
+          description: Имя объекта-цели
+          example: "Номенклатура"
+        source_tabular_part:
+          type: string
+          description: |
+            Имя табличной части источника, если ссылочный реквизит находится
+            внутри табличной части. Поле может присутствовать и при
+            `level=tables`, чтобы DataHub source мог построить связь от
+            dataset-а табличной части, а не от родительского объекта.
+          example: "Товары"
+        source_attribute:
+          type: string
+          description: |
+            Имя реквизита-источника (присутствует при level=columns).
+            Реквизит объекта source_name, значение которого ссылается
+            на объект-цель.
+          example: "Номенклатура"
+        target_attribute:
+          type: string
+          description: |
+            Имя реквизита-цели (присутствует при level=columns).
+            Реквизит объекта target_name, на который указывает source_attribute.
+            Для ссылок на объект целиком обычно "Ссылка".
+            Используется только как детализация доменной ссылки; текущая
+            реализация не строит DataHub FineGrainedLineage из `/references`.
+          example: "Ссылка"
+
+    LineageEdge:
+      type: object
+      description: |
+        Dataset-level поток данных между объектами 1С. Маппится в DataHub
+        как `UpstreamLineage`: downstream dataset содержит upstream dataset
+        в списке upstreams.
+      required:
+        - upstream_object_type
+        - upstream_name
+        - downstream_object_type
+        - downstream_name
+        - kind
+      properties:
+        upstream_object_type:
+          type: string
+          description: Вид объекта-источника данных.
+          example: "Documents"
+        upstream_name:
+          type: string
+          description: Имя объекта-источника данных.
+          example: "ЗаказКлиента"
+        downstream_object_type:
+          type: string
+          description: Вид объекта-приёмника данных.
+          example: "AccumulationRegisters"
+        downstream_name:
+          type: string
+          description: Имя объекта-приёмника данных.
+          example: "Продажи"
+        kind:
+          type: string
+          description: |
+            Тип lineage-связи:
+            - basis — ввод на основании;
+            - register_movement — движение документа по регистру;
+            - selection_criterion — связь через критерий отбора;
+            - manual_dataset_flow — ручная внутренняя dataset-level связь.
+          enum: [basis, register_movement, selection_criterion, manual_dataset_flow]
+          example: "register_movement"
+        source:
+          type: string
+          description: |
+            Источник обнаружения связи. Для текущего контракта ожидается `metadata`;
+            при будущем развитии можно использовать `static_code`,
+            `runtime` или `manual`.
+          enum: [metadata, static_code, runtime, manual]
+          default: metadata
+          example: "metadata"
+        confidence:
+          type: string
+          description: |
+            Степень уверенности в том, что связь отражает реальный поток
+            данных, а не только потенциальную возможность на уровне
+            метаданных.
+          enum: [low, medium, high]
+          default: medium
+          example: "medium"
+        description:
+          type: string
+          description: Человекочитаемое пояснение связи.
+          example: "Документ ЗаказКлиента делает движения по регистру Продажи."
+        details:
+          type: object
+          description: |
+            Дополнительные сведения о связи, специфичные для kind.
+            Например имя критерия отбора, режим движения регистра или
+            имя объекта-основания из метаданных 1С.
+          additionalProperties: true
+
+    IntegrationService:
+      type: object
+      required: [service_type, name, full_name, endpoints]
+      description: |
+        HTTP/Web-сервис 1С как integration interface. DataHub source
+        эмитит эту сущность как `DataFlow`.
+      properties:
+        service_type:
+          type: string
+          enum: [HTTPServices, WebServices]
+        name:
+          type: string
+          example: "OrdersApi"
+        full_name:
+          type: string
+          example: "HTTPService.OrdersApi"
+        synonym:
+          type: string
+        comment:
+          type: string
+        root_url:
+          type: string
+          description: Корневой URL HTTP-сервиса.
+          example: "orders"
+        reuse_sessions:
+          type: string
+          description: Режим повторного использования сеансов HTTP-сервиса.
+        session_max_age:
+          type: integer
+          description: Максимальный возраст сеанса HTTP-сервиса.
+        namespace:
+          type: string
+          description: Namespace Web-сервиса.
+        descriptor_file_name:
+          type: string
+          description: Имя файла публикации/descriptor Web-сервиса.
+        endpoints:
+          type: array
+          items:
+            $ref: "#/components/schemas/IntegrationEndpoint"
+
+    IntegrationEndpoint:
+      type: object
+      required: [endpoint_type, name, full_name]
+      description: |
+        Executable endpoint интеграционного сервиса 1С. DataHub source
+        эмитит его как `DataJob` внутри service `DataFlow`.
+      properties:
+        endpoint_type:
+          type: string
+          enum: [http_method, web_operation]
+        name:
+          type: string
+        full_name:
+          type: string
+          example: "HTTPService.OrdersApi.URLTemplate.Orders.Method.Post"
+        synonym:
+          type: string
+        comment:
+          type: string
+        url_template_name:
+          type: string
+        url_template_full_name:
+          type: string
+        url_template:
+          type: string
+        method_name:
+          type: string
+        http_method:
+          type: string
+          example: "POST"
+        handler:
+          type: string
+        operation_name:
+          type: string
+        procedure_name:
+          type: string
+        transactioned:
+          type: boolean
+        nillable:
+          type: boolean
+        data_lock_control_mode:
+          type: string
+        return_xdto_type:
+          type: string
+        parameters:
+          type: array
+          items:
+            $ref: "#/components/schemas/WebServiceParameter"
+        input_objects:
+          type: array
+          description: |
+            Внутренние 1С-объекты, вручную указанные как inputs endpoint-а.
+            Это metadata hint, а не полный DataHub `DataJobInputOutput`.
+          items:
+            $ref: "#/components/schemas/IntegrationInputObject"
+
+    WebServiceParameter:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+        direction:
+          type: string
+        xdto_type:
+          type: string
+        nillable:
+          type: boolean
+
+    IntegrationInputObject:
+      type: object
+      required: [object_type, name, full_name]
+      properties:
+        object_type:
+          type: string
+          description: Вид 1С-объекта в canonical English plural форме.
+          example: "Documents"
+        name:
+          type: string
+          example: "ЗаказПокупателя"
+        full_name:
+          type: string
+          example: "Document.ЗаказПокупателя"
+        source:
+          type: string
+          enum: [metadata, static_code, runtime, manual]
+          default: manual
+        confidence:
+          type: string
+          enum: [low, medium, high]
+          default: medium
+        description:
+          type: string
+        details:
+          type: object
+          additionalProperties: true
+
+    DbMapping:
+      type: object
+      required: [object_type, name, tables]
+      description: |
+        Маппинг 1С-объекта на физические таблицы реляционной СУБД.
+        Префикс `db_` (а не `pg_`) намеренный: 1С может работать с
+        разными СУБД (PostgreSQL, MS SQL Server, Oracle), и контракт
+        не должен закладывать конкретную одну. Имя таблицы возвращается
+        как есть, без префикса схемы — за схему/БД отвечает потребитель
+        (для Postgres-deployment-а это конфигурируется в коннекторе).
+      properties:
+        object_type:
+          type: string
+          description: Вид объекта 1С в canonical English plural форме.
+          example: "Catalogs"
+        name:
+          type: string
+          description: Имя объекта 1С
+          example: "Номенклатура"
+        tables:
+          type: array
+          description: |
+            Список таблиц СУБД, соответствующих объекту. Один объект
+            обычно маппится на несколько физических таблиц:
+            основную (`Main`), табличные части (`TabularSection`)
+            и — для регистров — таблицы итогов
+            (`Totals` для накопления, `TotalsSliceFirst`/
+            `TotalsSliceLast` для сведений).
+          items:
+            $ref: "#/components/schemas/DbTableMapping"
+
+    DbTableMapping:
+      type: object
+      required: [db_table_name, purpose, columns]
+      properties:
+        db_table_name:
+          type: string
+          description: Имя таблицы в СУБД, как есть (без схемы).
+          example: "_Reference42"
+        purpose:
+          type: string
+          description: |
+            Назначение таблицы в физической структуре хранения 1С.
+            Значения соответствуют свойству "Назначение" объекта
+            "ТаблицаХранения" из платформенного API, переведённому на
+            английский (см. справку платформы 1С,
+            "ПолучитьСтруктуруХраненияБазыДанных").
+
+            * `Main` — основная таблица объекта (Справочник, Документ,
+              Регистр и т.п.).
+            * `TabularSection` — таблица табличной части. Имя
+              соответствующей ТЧ-объекта возвращается в поле
+              `tabular_section_name` (см. ниже) — позволяет
+              DataHub-коннектору сматчить физическую таблицу с
+              ТЧ-датасетом и построить Sibling.
+            * `Totals` — таблица итогов регистра накопления.
+            * `TotalsSliceFirst`, `TotalsSliceLast` — таблицы срезов
+              регистра сведений (первый/последний срез).
+
+            При расширении этого enum'а коннектор DataHub'а намеренно
+            пропускает неизвестные значения с предупреждением.
+          enum: [Main, TabularSection, Totals, TotalsSliceFirst, TotalsSliceLast]
+          example: "Main"
+        tabular_section_name:
+          type: string
+          description: |
+            Имя табличной части в конфигурации 1С (как в свойстве
+            "Имя" объекта метаданных ТабличнаяЧасть). Присутствует
+            **только** при `purpose=TabularSection`. Совпадает со
+            значением поля `name` элементов ответа
+            `GET /objects/{type}/{name}/tabular-parts`, что позволяет
+            потребителю однозначно сматчить физическую таблицу с
+            ТЧ-объектом 1С.
+          example: "Товары"
+        columns:
+          type: array
+          description: Маппинг реквизитов 1С на колонки СУБД.
+          items:
+            $ref: "#/components/schemas/DbColumnMapping"
+
+    DbColumnMapping:
+      type: object
+      required: [attribute_name, db_columns]
+      properties:
+        attribute_name:
+          type: string
+          description: Имя реквизита 1С (для системных колонок — без префикса `_`).
+          example: "Контрагент"
+        db_columns:
+          type: array
+          description: |
+            Колонки СУБД, соответствующие реквизиту 1С. Обычно одна,
+            но для составных и ссылочных типов — несколько (например,
+            у реквизита с типом-объединением будут отдельные колонки
+            под значение, дискриминатор типа и дискриминатор вида
+            ссылки — см. `purpose` в `DbColumn`).
+          items:
+            $ref: "#/components/schemas/DbColumn"
+
+    DbColumn:
+      type: object
+      required: [column_name]
+      description: |
+        Описание одной физической колонки СУБД. Тип колонки в этой
+        версии API не возвращается: 1С-платформа не предоставляет
+        прямого API для получения SQL-типа физического поля, а
+        пытаться выводить его эвристиками (по суффиксам имени)
+        приводит к нестабильным результатам в разных версиях.
+        Если нужны точные SQL-типы — рекомендуется отдельно
+        запустить стандартный коннектор СУБД для DataHub.
+      properties:
+        column_name:
+          type: string
+          description: Имя колонки в СУБД, как есть (с системными префиксами).
+          example: "_Fld142"
+        purpose:
+          type: string
+          description: |
+            Семантическая роль колонки для реквизитов сложных типов:
+
+            * `value` — основное значение (примитив или одиночная ссылка).
+            * `type_discriminator` — дискриминатор типа в составном поле
+              (определяет, какой именно тип хранится в `value`).
+            * `reference` — UUID ссылочного значения.
+            * `reference_discriminator` — дискриминатор ссылочного типа
+              (для определяемых типов с несколькими ссылочными
+              вариантами; колонка с суффиксом `_RTRef`).
+
+            Для простых типов и системных колонок поле может
+            отсутствовать — потребители трактуют это как `value`.
+          enum: [value, type_discriminator, reference, reference_discriminator]
+
+    Error:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: string
+          description: Описание ошибки
+          example: "Object not found"

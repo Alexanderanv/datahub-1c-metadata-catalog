@@ -1,0 +1,47 @@
+# Стратегия line endings:
+#   * в индексе (репозитории) ВСЕ текстовые файлы хранятся в LF.
+#   * на диске eol определяется ЛОКАЛЬНОЙ настройкой core.autocrlf:
+#       - macOS / Linux:  core.autocrlf=input  → файлы LF на диске.
+#       - Windows + EDT:  core.autocrlf=true   → файлы CRLF на диске.
+#   * core.safecrlf=true совместим с этой схемой: после нормализации
+#     round-trip CRLF↔LF обратим, и safecrlf не блокирует.
+#
+# Поэтому НЕ используем eol=lf (он бы навязал LF на диске даже на Windows)
+# и НЕ используем -text (он бы отключил нормализацию вообще, и в индексе
+# у разных разработчиков лежали бы разные байты).
+
+# Дефолт: всё, что git считает текстом — нормализовать.
+* text=auto
+
+# Явные text-файлы — на случай, если эвристика text=auto ошибётся
+# (бинарные включения внутри XML, кириллица без BOM и т.п.).
+*.bsl     text
+*.os      text
+*.mdo     text
+*.xml     text
+*.mdc     text
+*.py      text
+*.yaml    text
+*.yml     text
+*.json    text
+*.md      text
+*.toml    text
+*.ini     text
+*.cfg     text
+*.sh      text
+Makefile  text
+.env*     text
+
+# Бинарники — никогда не трогаем (ни по содержимому, ни по eol).
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.ico     binary
+*.zip     binary
+*.gz      binary
+*.epf     binary
+*.erf     binary
+*.cf      binary
+*.cfu     binary
+*.dt      binary

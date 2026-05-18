@@ -1,0 +1,85 @@
+namespace io.github.alexanderanv.datahub.onec
+
+/**
+ * Структурированный маппинг объекта 1С на таблицу(-ы) физической СУБД.
+ *
+ * Заполняется по ответу `/db-mapping/{type}/{name}` из 1c-metadata-service.
+ * Аспект намеренно использует DB-neutral имена полей: 1С может работать с
+ * разными СУБД (PostgreSQL, MS SQL, Oracle), а сервис 1С отдаёт
+ * платформенный physical mapping без привязки к конкретному backend-у.
+ * В API сервиса 1С этим полям соответствуют `db_table_name` /
+ * `db_columns[].column_name`.
+ *
+ * Аспект эмитится для 1С-датасетов, которые имеют прямой 1:1 DB-маппинг на
+ * физическую таблицу: `purpose=Main` и `purpose=TabularSection` (см.
+ * `DbTableMapping.purpose` в openapi.yaml). Стандартный DataHub Siblings
+ * aspect для этих же пар включается отдельно через `ingestion.emit_db_siblings`.
+ * Таблицы итогов регистров (`Totals`/`TotalsSliceFirst`/`TotalsSliceLast`)
+ * аспект не получают.
+ *
+ * Эмитится на dataset-е **слоя 1С** (не на физическом DB dataset-е) — так UI
+ * может единообразно запросить аспект у любого 1С-датасета и показать
+ * таблицу маппинга в MFE-секции «DB mapping».
+ */
+@Aspect = {
+  "name": "oneCDbMapping",
+  "autoRender": true,
+  "renderSpec": {
+    "displayType": "tabular",
+    "key": "attributeColumns",
+    "displayName": "Column mapping 1C"
+  }
+}
+record OneCDbMapping {
+
+  /**
+   * Полное имя физической таблицы СУБД, например "public._Reference116".
+   * Может включать schema через точку.
+   */
+  dbTableName: string
+
+  /**
+   * Маппинг реквизитов 1С на физические колонки СУБД.
+   * Для простых типов (Строка, Число, Дата) — одна запись attribute→column.
+   * Для составных/ссылочных — несколько записей с разными ролями columnRole.
+   */
+  attributeColumns: array[record AttributeColumnMapping {
+
+    /**
+     * Имя реквизита в 1С — каким пришло из API (RU/EN, как есть).
+     */
+    attributeName: string
+
+    /**
+     * Транслитерированное имя (fieldPath в SchemaField датасета 1С).
+     * Дублирование удобно: MFE не обязана сама звать translit-сервис,
+     * а может сразу джойнить с SchemaField по этому значению.
+     */
+    attributeFieldPath: string
+
+    /**
+     * Имя физической колонки СУБД, например "_Fld123RRef".
+     */
+    dbColumnName: string
+
+    /**
+     * Роль колонки в физической структуре хранения 1С:
+     *   - "value"            — основная колонка значения (для простых
+     *                          типов — единственная);
+     *   - "type"             — дискриминатор типа значения для
+     *                          составных полей (`_Fld123_TYPE`);
+     *   - "ref"              — UUID ссылочного значения (`_Fld123RRef`);
+     *   - "ref_discriminator" — дискриминатор ссылочного типа для
+     *                          определяемых типов с несколькими
+     *                          ссылочными вариантами (`_Fld123_RTRef`).
+     *
+     * Имена приходят из `DbColumn.purpose` ответа сервиса (поле
+     * `purpose` enum в openapi.yaml); коннектор маппит их 1:1 в эту
+     * строку, неизвестные purpose откатываются в "value".
+     *
+     * Поле объявлено `string`, а не enum, чтобы новые роли можно было
+     * добавлять без пересборки custom-models artifact-а.
+     */
+    columnRole: string
+  }]
+}

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mdclass:HTTPService xmlns:mdclass="http://g5.1c.ru/v8/dt/metadata/mdclass" uuid="82a5a5ce-883e-4ff1-b382-30a474e33bd0">
+  <name>MetadataService</name>
+  <synonym>
+    <key>en</key>
+    <value>Metadata service</value>
+  </synonym>
+  <rootURL>metadataservice</rootURL>
+  <reuseSessions>AutoUse</reuseSessions>
+  <sessionMaxAge>1</sessionMaxAge>
+  <urlTemplates uuid="0a62ee2e-a27c-4924-98b6-f2e4b9efb7fb">
+    <name>Health</name>
+    <synonym>
+      <key>en</key>
+      <value>Health</value>
+    </synonym>
+    <template>/health</template>
+    <methods uuid="94c7b849-f634-48a1-ab2b-ad05e2630ee8">
+      <name>HealthCheck</name>
+      <synonym>
+        <key>en</key>
+        <value>Health check</value>
+      </synonym>
+      <handler>HealthGET</handler>
+    </methods>
+  </urlTemplates>
+  <urlTemplates uuid="3e042fb7-67d7-43c8-a9c6-45a3bcc190c0">
+    <name>Objects</name>
+    <synonym>
+      <key>ru</key>
+      <value>Objects</value>
+    </synonym>
+    <template>/objects/*</template>
+    <methods uuid="507b218b-3779-4bbd-9e0e-4509aca880d0">
+      <name>GetObjectsData</name>
+      <synonym>
+        <key>ru</key>
+        <value>Get objects data</value>
+      </synonym>
+      <handler>ObjectsGET</handler>
+    </methods>
+  </urlTemplates>
+  <urlTemplates uuid="9c43bcd3-1f0d-48fe-8f5f-ca60bc929473">
+    <name>References</name>
+    <synonym>
+      <key>ru</key>
+      <value>References</value>
+    </synonym>
+    <template>/references</template>
+    <methods uuid="3c2c7b54-ca21-42e2-b79a-0196d2461b32">
+      <name>GetReferences</name>
+      <synonym>
+        <key>ru</key>
+        <value>Get references</value>
+      </synonym>
+      <handler>ReferencesGET</handler>
+    </methods>
+  </urlTemplates>
+  <urlTemplates uuid="b8a71f2d-5c3e-4d99-a1f7-c8d2e6b9a401">
+    <name>DbMapping</name>
+    <synonym>
+      <key>en</key>
+      <value>Db mapping</value>
+    </synonym>
+    <template>/db-mapping/*</template>
+    <methods uuid="d4c3b2a1-9e8f-7d6c-5b4a-301928374650">
+      <name>GetDbMapping</name>
+      <synonym>
+        <key>en</key>
+        <value>Get db mapping</value>
+      </synonym>
+      <handler>DbMappingGET</handler>
+    </methods>
+  </urlTemplates>
+  <urlTemplates uuid="628d4af3-5f31-4ad4-9127-9dcee842cd12">
+    <name>Lineage</name>
+    <synonym>
+      <key>ru</key>
+      <value>Lineage</value>
+    </synonym>
+    <template>/lineage</template>
+    <methods uuid="d44b1daf-1f58-472a-a13e-1bcba898faef">
+      <name>GetLineage</name>
+      <synonym>
+        <key>ru</key>
+        <value>Get lineage</value>
+      </synonym>
+      <handler>LineageGET</handler>
+    </methods>
+  </urlTemplates>
+  <urlTemplates uuid="81d2b468-6f0c-4a42-9d83-2db91c63421a">
+    <name>IntegrationServices</name>
+    <synonym>
+      <key>en</key>
+      <value>Integration services</value>
+    </synonym>
+    <template>/integration-services</template>
+    <methods uuid="8b22950f-8e87-4dd9-bf94-d621b89a2f8f">
+      <name>GetIntegrationServices</name>
+      <synonym>
+        <key>en</key>
+        <value>Get integration services</value>
+      </synonym>
+      <handler>IntegrationServicesGET</handler>
+    </methods>
+  </urlTemplates>
+</mdclass:HTTPService>

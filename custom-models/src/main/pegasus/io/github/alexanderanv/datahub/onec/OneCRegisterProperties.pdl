@@ -1,0 +1,39 @@
+namespace io.github.alexanderanv.datahub.onec
+
+/**
+ * Видо-специфичные свойства регистров 1С.
+ *
+ * Заполняется для datasets с SubType `Information Register`,
+ * `Accumulation Register`, `Accounting Register` или
+ * `Calculation Register`.
+ */
+@Aspect = {
+  "name": "oneCRegisterProperties"
+}
+record OneCRegisterProperties {
+
+  /**
+   * Вид регистра: "Information", "Accumulation", "Accounting" или "Calculation".
+   * Дублирует информацию из SubType dataset-а, но удобно иметь в аспекте,
+   * чтобы в GraphQL можно было фильтровать единственным запросом.
+   */
+  registerKind: string
+
+  /**
+   * Периодичность, если применима для конкретного вида регистра:
+   * "Секунда", "День", "Месяц", ...
+   */
+  periodicity: optional string
+
+  /**
+   * Режим записи: "Независимый" или "ПодчинениеРегистратору".
+   * Значим для независимых/подчинённых регистров, если платформа отдаёт это
+   * свойство для конкретного вида.
+   */
+  writeMode: optional string
+
+  /**
+   * Ведутся ли итоги, если применимо для конкретного вида регистра.
+   */
+  totalsEnabled: optional boolean
+}

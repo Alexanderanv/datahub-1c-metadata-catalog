@@ -1,0 +1,27 @@
+# DataHub custom-models plugin registry: регистрация кастомных аспектов
+# "oneC*" на стандартных entity types dataset/container.
+#
+# Файл упаковывается в zip-плагин (`build/dist/custom-models.zip`) внутри
+# wrapper-каталога `custom-onec/<version>/` и кладётся в
+# `~/.datahub/plugins/models/` — GMS v1.5.0.2 подхватывает его без пересборки
+# Registry for custom 1C aspects.
+#
+# Все аспекты опциональные: source-плагин может эмитировать их не все (например,
+# oneCCatalogProperties — только на catalog-like объектах). Регистрация на
+# dataset/container означает лишь "эти entity types могут принимать аспект";
+# наличие/отсутствие проверяется на стороне UI-плагина (пустой GraphQL-ответ →
+# вкладка не рендерится).
+
+id: custom-onec
+entities:
+  - name: dataset
+    aspects:
+      - oneCObjectProperties
+      - oneCCatalogProperties
+      - oneCDocumentProperties
+      - oneCRegisterProperties
+      - oneCDbMapping
+      - oneCDomainRelationships
+  - name: container
+    aspects:
+      - oneCObjectProperties

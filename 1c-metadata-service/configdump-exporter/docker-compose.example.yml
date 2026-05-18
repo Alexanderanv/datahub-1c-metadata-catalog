@@ -1,0 +1,17 @@
+services:
+  configdump-exporter:
+    image: ${ONEC_CONFIGDUMP_IMAGE:-ghcr.io/alexanderanv/onec-configdump-exporter:${ONEC_VERSION:-8.3.27.1644}}
+    build:
+      context: .
+      args:
+        ONEC_VERSION: ${ONEC_VERSION:-8.3.27.1644}
+        BASE_IMAGE: ${BASE_IMAGE:-debian:12-slim}
+        ONEC_UID: ${ONEC_UID:-1000}
+        ONEC_GID: ${ONEC_GID:-1000}
+    env_file:
+      - .env
+    volumes:
+      - ./out:/out
+      - ./work:/work
+    extra_hosts:
+      - "1c-host:host-gateway"

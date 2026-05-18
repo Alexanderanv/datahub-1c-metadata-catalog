@@ -1,0 +1,67 @@
+// DataHub custom metamodel build: PDL → data-template JAR → model plugin.
+// Итоговый zip распаковывается в ~/.datahub/plugins/models/.
+
+buildscript {
+    ext.pegasusVersion = '29.65.7'
+
+    repositories {
+        mavenCentral()
+        maven { url 'https://linkedin.jfrog.io/artifactory/open-source/' }
+    }
+
+    dependencies {
+        classpath "com.linkedin.pegasus:gradle-plugins:${pegasusVersion}"
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+apply plugin: 'pegasus'
+
+group = 'io.github.alexanderanv.datahub.onec'
+version = '0.1.0'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://linkedin.jfrog.io/artifactory/open-source/' }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+// Версия DataHub выровнена с Python-плагином (acryl-datahub ~= 1.5.0).
+// При апгрейде v1.5.0 → v1.6 синхронно обновлять здесь и
+// в datahub/pyproject.toml.
+ext {
+    datahubVersion = '1.5.0.2'
+    registryId = 'custom-onec'
+}
+
+dependencies {
+    implementation "io.acryl:datahub-custom-plugin-lib:${datahubVersion}"
+    dataModel "io.acryl:datahub-custom-plugin-lib:${datahubVersion}"
+}
+
+// Артефакт для plugin-path: DataHub loader сканирует не корень models/,
+// а каталоги второго уровня <registry-id>/<version>/. Поэтому zip сразу
+// содержит wrapper-каталог, пригодный для распаковки в ~/.datahub/plugins/models/.
+task pluginZip(type: Zip, dependsOn: [jar, mainDataTemplateJar]) {
+    archiveBaseName = 'custom-models'
+    archiveVersion = ''
+    destinationDirectory = file("$buildDir/dist")
+
+    from("$buildDir/libs") {
+        include "*.jar"
+        exclude "*-test-data-template-*.jar"
+        into "${registryId}/${project.version}/libs"
+    }
+    from("$projectDir/registry") {
+        into "${registryId}/${project.version}"
+    }
+}
+
+build.dependsOn pluginZip

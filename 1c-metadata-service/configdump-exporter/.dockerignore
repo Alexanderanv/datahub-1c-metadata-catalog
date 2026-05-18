@@ -1,0 +1,5 @@
+.env
+build/
+out/
+work/
+*.log

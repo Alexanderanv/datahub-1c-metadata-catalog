@@ -1,0 +1,46 @@
+source:
+  type: 1c-enterprise
+  config:
+    base_url: ${ONEC_BASE_URL}
+    username: ${ONEC_USERNAME}
+    password: ${ONEC_PASSWORD}
+    env: ${DATAHUB_ENV:-DEV}
+    infobase:
+      name: ${ONEC_INFOBASE_NAME}
+      display_name: ${ONEC_INFOBASE_DISPLAY_NAME:-${ONEC_INFOBASE_NAME}}
+
+    metadata_uuid_source:
+      config_dump_info_path: ${ONEC_CONFIG_DUMP_INFO_PATH}
+
+    # Пустые списки означают "все объекты этого типа метаданных 1С".
+    # Для общей установки DataHub лучше указывать явные имена объектов.
+    object_filters:
+      include_objects:
+        Constants: []
+        Catalogs: []
+        Documents: []
+        ChartsOfCharacteristicTypes: []
+        ChartsOfAccounts: []
+        ChartsOfCalculationTypes: []
+        InformationRegisters: []
+        AccumulationRegisters: []
+        AccountingRegisters: []
+        CalculationRegisters: []
+        Enums: []
+      common_filters:
+        tabular_sections:
+          - ДополнительныеРеквизиты
+
+    ingestion:
+      attributes: true
+      tabular_sections: true
+      lineage: false
+      column_lineage: false
+      db_mapping: false
+      emit_custom_aspects: ${ONEC_EMIT_CUSTOM_ASPECTS:-true}
+
+sink:
+  type: datahub-rest
+  config:
+    server: ${DATAHUB_GMS_URL}
+    token: ${DATAHUB_GMS_TOKEN:-}

@@ -1,0 +1,1584 @@
+[
+  {
+    "aspect": {
+      "path": [
+        {
+          "id": "urn:li:container:infobase:1c-test:PROD",
+          "urn": "urn:li:container:infobase:1c-test:PROD"
+        },
+        {
+          "id": "urn:li:container:1c-test:Documents:PROD",
+          "urn": "urn:li:container:1c-test:Documents:PROD"
+        }
+      ]
+    },
+    "aspectName": "browsePathsV2",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:11111111-1111-1111-1111-111111111103:PROD",
+    "id": "urn:li:container:1c-test:11111111-1111-1111-1111-111111111103:PROD-browsePathsV2"
+  },
+  {
+    "aspect": {
+      "container": "urn:li:container:1c-test:Documents:PROD"
+    },
+    "aspectName": "container",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:11111111-1111-1111-1111-111111111103:PROD",
+    "id": "urn:li:container:1c-test:11111111-1111-1111-1111-111111111103:PROD-container"
+  },
+  {
+    "aspect": {
+      "customProperties": {
+        "canonicalFullName": "Document.ЗаказКлиента",
+        "infobaseName": "1c-test",
+        "metadataKind": "Document",
+        "metadataKindLabel": "Документ",
+        "metadataUuid": "11111111-1111-1111-1111-111111111103",
+        "transliteratedName": "Document.ZakazKlienta"
+      },
+      "description": "Заказ клиента",
+      "name": "Документ.ЗаказКлиента",
+      "qualifiedName": "Документ.ЗаказКлиента"
+    },
+    "aspectName": "containerProperties",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:11111111-1111-1111-1111-111111111103:PROD",
+    "id": "urn:li:container:1c-test:11111111-1111-1111-1111-111111111103:PROD-containerProperties"
+  },
+  {
+    "aspect": {
+      "configurationName": "1c-test",
+      "fullName": "Документ.ЗаказКлиента",
+      "metadataUuid": "11111111-1111-1111-1111-111111111103",
+      "objectKind": "Документ",
+      "synonym": "Заказ клиента"
+    },
+    "aspectName": "oneCObjectProperties",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:11111111-1111-1111-1111-111111111103:PROD",
+    "id": "urn:li:container:1c-test:11111111-1111-1111-1111-111111111103:PROD-oneCObjectProperties"
+  },
+  {
+    "aspect": {
+      "typeNames": [
+        "Document"
+      ]
+    },
+    "aspectName": "subTypes",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:11111111-1111-1111-1111-111111111103:PROD",
+    "id": "urn:li:container:1c-test:11111111-1111-1111-1111-111111111103:PROD-subTypes"
+  },
+  {
+    "aspect": {
+      "path": [
+        {
+          "id": "urn:li:container:infobase:1c-test:PROD",
+          "urn": "urn:li:container:infobase:1c-test:PROD"
+        }
+      ]
+    },
+    "aspectName": "browsePathsV2",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:AccumulationRegisters:PROD",
+    "id": "urn:li:container:1c-test:AccumulationRegisters:PROD-browsePathsV2"
+  },
+  {
+    "aspect": {
+      "container": "urn:li:container:infobase:1c-test:PROD"
+    },
+    "aspectName": "container",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:AccumulationRegisters:PROD",
+    "id": "urn:li:container:1c-test:AccumulationRegisters:PROD-container"
+  },
+  {
+    "aspect": {
+      "customProperties": {},
+      "name": "Регистры накопления",
+      "qualifiedName": "Регистры накопления"
+    },
+    "aspectName": "containerProperties",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:AccumulationRegisters:PROD",
+    "id": "urn:li:container:1c-test:AccumulationRegisters:PROD-containerProperties"
+  },
+  {
+    "aspect": {
+      "typeNames": [
+        "1C Object Kind Folder"
+      ]
+    },
+    "aspectName": "subTypes",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:AccumulationRegisters:PROD",
+    "id": "urn:li:container:1c-test:AccumulationRegisters:PROD-subTypes"
+  },
+  {
+    "aspect": {
+      "path": [
+        {
+          "id": "urn:li:container:infobase:1c-test:PROD",
+          "urn": "urn:li:container:infobase:1c-test:PROD"
+        }
+      ]
+    },
+    "aspectName": "browsePathsV2",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:Catalogs:PROD",
+    "id": "urn:li:container:1c-test:Catalogs:PROD-browsePathsV2"
+  },
+  {
+    "aspect": {
+      "container": "urn:li:container:infobase:1c-test:PROD"
+    },
+    "aspectName": "container",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:Catalogs:PROD",
+    "id": "urn:li:container:1c-test:Catalogs:PROD-container"
+  },
+  {
+    "aspect": {
+      "customProperties": {},
+      "name": "Справочники",
+      "qualifiedName": "Справочники"
+    },
+    "aspectName": "containerProperties",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:Catalogs:PROD",
+    "id": "urn:li:container:1c-test:Catalogs:PROD-containerProperties"
+  },
+  {
+    "aspect": {
+      "typeNames": [
+        "1C Object Kind Folder"
+      ]
+    },
+    "aspectName": "subTypes",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:Catalogs:PROD",
+    "id": "urn:li:container:1c-test:Catalogs:PROD-subTypes"
+  },
+  {
+    "aspect": {
+      "path": [
+        {
+          "id": "urn:li:container:infobase:1c-test:PROD",
+          "urn": "urn:li:container:infobase:1c-test:PROD"
+        }
+      ]
+    },
+    "aspectName": "browsePathsV2",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:Documents:PROD",
+    "id": "urn:li:container:1c-test:Documents:PROD-browsePathsV2"
+  },
+  {
+    "aspect": {
+      "container": "urn:li:container:infobase:1c-test:PROD"
+    },
+    "aspectName": "container",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:Documents:PROD",
+    "id": "urn:li:container:1c-test:Documents:PROD-container"
+  },
+  {
+    "aspect": {
+      "customProperties": {},
+      "name": "Документы",
+      "qualifiedName": "Документы"
+    },
+    "aspectName": "containerProperties",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:Documents:PROD",
+    "id": "urn:li:container:1c-test:Documents:PROD-containerProperties"
+  },
+  {
+    "aspect": {
+      "typeNames": [
+        "1C Object Kind Folder"
+      ]
+    },
+    "aspectName": "subTypes",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:1c-test:Documents:PROD",
+    "id": "urn:li:container:1c-test:Documents:PROD-subTypes"
+  },
+  {
+    "aspect": {
+      "path": []
+    },
+    "aspectName": "browsePathsV2",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:infobase:1c-test:PROD",
+    "id": "urn:li:container:infobase:1c-test:PROD-browsePathsV2"
+  },
+  {
+    "aspect": {
+      "customProperties": {
+        "infobaseName": "1c-test"
+      },
+      "name": "1c-test",
+      "qualifiedName": "1c-test"
+    },
+    "aspectName": "containerProperties",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:infobase:1c-test:PROD",
+    "id": "urn:li:container:infobase:1c-test:PROD-containerProperties"
+  },
+  {
+    "aspect": {
+      "typeNames": [
+        "1C Infobase"
+      ]
+    },
+    "aspectName": "subTypes",
+    "entityType": "container",
+    "entityUrn": "urn:li:container:infobase:1c-test:PROD",
+    "id": "urn:li:container:infobase:1c-test:PROD-subTypes"
+  },
+  {
+    "aspect": {
+      "path": []
+    },
+    "aspectName": "browsePathsV2",
+    "entityType": "dataFlow",
+    "entityUrn": "urn:li:dataFlow:(1c-enterprise,1c-test.posting.11111111-1111-1111-1111-111111111103,PROD)",
+    "id": "urn:li:dataFlow:(1c-enterprise,1c-test.posting.11111111-1111-1111-1111-111111111103,PROD)-browsePathsV2"
+  },
+  {
+    "aspect": {
+      "customProperties": {
+        "documentFullName": "Документ.ЗаказКлиента",
+        "documentName": "ЗаказКлиента",
+        "documentObjectType": "Documents",
+        "infobaseName": "1c-test",
+        "inputSelection": "all_tabular_parts",
+        "metadataUuid": "11111111-1111-1111-1111-111111111103",
+        "processKind": "document_posting"
+      },
+      "description": "Статический процесс проведения документа 1С. Входы процесса — main dataset документа и все его табличные части; выходы — регистры, в которые документ делает движения.",
+      "env": "PROD",
+      "name": "Проведение Документ.ЗаказКлиента"
+    },
+    "aspectName": "dataFlowInfo",
+    "entityType": "dataFlow",
+    "entityUrn": "urn:li:dataFlow:(1c-enterprise,1c-test.posting.11111111-1111-1111-1111-111111111103,PROD)",
+    "id": "urn:li:dataFlow:(1c-enterprise,1c-test.posting.11111111-1111-1111-1111-111111111103,PROD)-dataFlowInfo"
+  },
+  {
+    "aspect": {
+      "removed": false
+    },
+    "aspectName": "status",
+    "entityType": "dataFlow",
+    "entityUrn": "urn:li:dataFlow:(1c-enterprise,1c-test.posting.11111111-1111-1111-1111-111111111103,PROD)",
+    "id": "urn:li:dataFlow:(1c-enterprise,1c-test.posting.11111111-1111-1111-1111-111111111103,PROD)-status"
+  },
+  {
+    "aspect": {
+      "path": []
+    },
+    "aspectName": "browsePathsV2",
+    "entityType": "dataJob",
+    "entityUrn": "urn:li:dataJob:(urn:li:dataFlow:(1c-enterprise,1c-test.posting.11111111-1111-1111-1111-111111111103,PROD),posting)",
+    "id": "urn:li:dataJob:(urn:li:dataFlow:(1c-enterprise,1c-test.posting.11111111-1111-1111-1111-111111111103,PROD),posting)-browsePathsV2"
+  },
+  {
+    "aspect": {
+      "customProperties": {
+        "documentFullName": "Документ.ЗаказКлиента",
+        "documentName": "ЗаказКлиента",
+        "documentObjectType": "Documents",
+        "infobaseName": "1c-test",
+        "inputSelection": "all_tabular_parts",
+        "metadataUuid": "11111111-1111-1111-1111-111111111103",
+        "processKind": "document_posting"
+      },
+      "description": "Проведение Документ.ЗаказКлиента",
+      "env": "PROD",
+      "flowUrn": "urn:li:dataFlow:(1c-enterprise,1c-test.posting.11111111-1111-1111-1111-111111111103,PROD)",
+      "name": "Проведение Документ.ЗаказКлиента",
+      "type": {
+        "string": "1C_DOCUMENT_POSTING"
+      }
+    },
+    "aspectName": "dataJobInfo",
+    "entityType": "dataJob",
+    "entityUrn": "urn:li:dataJob:(urn:li:dataFlow:(1c-enterprise,1c-test.posting.11111111-1111-1111-1111-111111111103,PROD),posting)",
+    "id": "urn:li:dataJob:(urn:li:dataFlow:(1c-enterprise,1c-test.posting.11111111-1111-1111-1111-111111111103,PROD),posting)-dataJobInfo"
+  },
+  {
+    "aspect": {
+      "inputDatasetEdges": [
+        {
+          "destinationUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)",
+          "properties": {
+            "confidences": "medium",
+            "lineageKind": "register_movement",
+            "role": "document_main",
+            "sources": "metadata"
+          }
+        },
+        {
+          "destinationUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)",
+          "properties": {
+            "confidences": "medium",
+            "inputSelection": "all_tabular_parts",
+            "lineageKind": "register_movement",
+            "role": "tabular_part",
+            "sources": "metadata",
+            "tabularPart": "Товары"
+          }
+        }
+      ],
+      "inputDatasets": [
+        "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)",
+        "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)"
+      ],
+      "outputDatasetEdges": [
+        {
+          "destinationUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)",
+          "properties": {
+            "confidences": "medium",
+            "lineageKind": "register_movement",
+            "role": "register_output",
+            "sources": "metadata"
+          }
+        }
+      ],
+      "outputDatasets": [
+        "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)"
+      ]
+    },
+    "aspectName": "dataJobInputOutput",
+    "entityType": "dataJob",
+    "entityUrn": "urn:li:dataJob:(urn:li:dataFlow:(1c-enterprise,1c-test.posting.11111111-1111-1111-1111-111111111103,PROD),posting)",
+    "id": "urn:li:dataJob:(urn:li:dataFlow:(1c-enterprise,1c-test.posting.11111111-1111-1111-1111-111111111103,PROD),posting)-dataJobInputOutput"
+  },
+  {
+    "aspect": {
+      "removed": false
+    },
+    "aspectName": "status",
+    "entityType": "dataJob",
+    "entityUrn": "urn:li:dataJob:(urn:li:dataFlow:(1c-enterprise,1c-test.posting.11111111-1111-1111-1111-111111111103,PROD),posting)",
+    "id": "urn:li:dataJob:(urn:li:dataFlow:(1c-enterprise,1c-test.posting.11111111-1111-1111-1111-111111111103,PROD),posting)-status"
+  },
+  {
+    "aspect": {
+      "datasetNameDelimiter": ".",
+      "displayName": "1C:Enterprise",
+      "logoUrl": "https://1c.ru/favicon.ico",
+      "name": "1c-enterprise",
+      "type": "OTHERS"
+    },
+    "aspectName": "dataPlatformInfo",
+    "entityType": "dataPlatform",
+    "entityUrn": "urn:li:dataPlatform:1c-enterprise",
+    "id": "urn:li:dataPlatform:1c-enterprise-dataPlatformInfo"
+  },
+  {
+    "aspect": {
+      "path": [
+        {
+          "id": "urn:li:container:infobase:1c-test:PROD",
+          "urn": "urn:li:container:infobase:1c-test:PROD"
+        },
+        {
+          "id": "urn:li:container:1c-test:Documents:PROD",
+          "urn": "urn:li:container:1c-test:Documents:PROD"
+        },
+        {
+          "id": "urn:li:container:1c-test:11111111-1111-1111-1111-111111111103:PROD",
+          "urn": "urn:li:container:1c-test:11111111-1111-1111-1111-111111111103:PROD"
+        }
+      ]
+    },
+    "aspectName": "browsePathsV2",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)-browsePathsV2"
+  },
+  {
+    "aspect": {
+      "container": "urn:li:container:1c-test:11111111-1111-1111-1111-111111111103:PROD"
+    },
+    "aspectName": "container",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)-container"
+  },
+  {
+    "aspect": {
+      "customProperties": {
+        "canonicalFullName": "Document.ЗаказКлиента",
+        "infobaseName": "1c-test",
+        "metadataKind": "Document",
+        "metadataKindLabel": "Документ",
+        "metadataUuid": "11111111-1111-1111-1111-111111111103",
+        "transliteratedName": "Document.ZakazKlienta"
+      },
+      "description": "Заказ клиента",
+      "name": "Документ.ЗаказКлиента",
+      "qualifiedName": "Документ.ЗаказКлиента",
+      "tags": []
+    },
+    "aspectName": "datasetProperties",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)-datasetProperties"
+  },
+  {
+    "aspect": {
+      "attributeColumns": [
+        {
+          "attributeFieldPath": "Nomer",
+          "attributeName": "Номер",
+          "columnRole": "value",
+          "dbColumnName": "_number"
+        }
+      ],
+      "dbTableName": "_document164"
+    },
+    "aspectName": "oneCDbMapping",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)-oneCDbMapping"
+  },
+  {
+    "aspect": {
+      "isPostable": true,
+      "numberLength": 11
+    },
+    "aspectName": "oneCDocumentProperties",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)-oneCDocumentProperties"
+  },
+  {
+    "aspect": {
+      "hasTabularPart": [
+        "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)"
+      ],
+      "mapsToDbTable": [
+        "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164,PROD)"
+      ],
+      "refersToObject": [
+        "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)"
+      ]
+    },
+    "aspectName": "oneCDomainRelationships",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)-oneCDomainRelationships"
+  },
+  {
+    "aspect": {
+      "configurationName": "1c-test",
+      "fullName": "Документ.ЗаказКлиента",
+      "metadataUuid": "11111111-1111-1111-1111-111111111103",
+      "objectKind": "Документ",
+      "synonym": "Заказ клиента"
+    },
+    "aspectName": "oneCObjectProperties",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)-oneCObjectProperties"
+  },
+  {
+    "aspect": {
+      "created": {
+        "actor": "urn:li:corpuser:unknown",
+        "time": 0
+      },
+      "fields": [
+        {
+          "description": "Уникальная ссылка объекта (GUID).",
+          "fieldPath": "Ref",
+          "isPartOfKey": true,
+          "label": "Ссылка",
+          "nativeDataType": "УникальныйИдентификатор",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.StringType": {}
+            }
+          }
+        },
+        {
+          "description": "Номер документа.",
+          "fieldPath": "Number",
+          "isPartOfKey": false,
+          "label": "Номер",
+          "nativeDataType": "Строка",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.StringType": {}
+            }
+          }
+        },
+        {
+          "description": "Дата документа.",
+          "fieldPath": "Date",
+          "isPartOfKey": false,
+          "label": "Дата",
+          "nativeDataType": "Дата",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.DateType": {}
+            }
+          }
+        },
+        {
+          "description": "Признак проведения документа.",
+          "fieldPath": "Posted",
+          "isPartOfKey": false,
+          "label": "Проведён",
+          "nativeDataType": "Булево",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.BooleanType": {}
+            }
+          }
+        },
+        {
+          "description": "Признак логического удаления.",
+          "fieldPath": "DeletionMark",
+          "isPartOfKey": false,
+          "label": "ПометкаУдаления",
+          "nativeDataType": "Булево",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.BooleanType": {}
+            }
+          }
+        }
+      ],
+      "hash": "",
+      "lastModified": {
+        "actor": "urn:li:corpuser:unknown",
+        "time": 0
+      },
+      "platform": "urn:li:dataPlatform:1c-enterprise",
+      "platformSchema": {
+        "com.linkedin.schema.OtherSchema": {
+          "rawSchema": ""
+        }
+      },
+      "primaryKeys": [
+        "Ref"
+      ],
+      "schemaName": "Document.ZakazKlienta",
+      "version": 0
+    },
+    "aspectName": "schemaMetadata",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)-schemaMetadata"
+  },
+  {
+    "aspect": {
+      "primary": true,
+      "siblings": [
+        "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164,PROD)"
+      ]
+    },
+    "aspectName": "siblings",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)-siblings"
+  },
+  {
+    "aspect": {
+      "typeNames": [
+        "Document"
+      ]
+    },
+    "aspectName": "subTypes",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)-subTypes"
+  },
+  {
+    "aspect": [
+      {
+        "op": "add",
+        "path": "/upstreams/urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)",
+        "value": {
+          "auditStamp": {
+            "actor": "urn:li:corpuser:unknown",
+            "time": 0
+          },
+          "dataset": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)",
+          "properties": {
+            "confidences": "medium,high",
+            "descriptions": "Ручная связь из расширения.",
+            "lineageKinds": "basis,manual_dataset_flow",
+            "oneCLineageManagedBy": "datahub-1c",
+            "oneCLineageScope": "direct_upstream",
+            "origins": "extension_registry",
+            "sources": "metadata,manual"
+          },
+          "type": "TRANSFORMED"
+        }
+      }
+    ],
+    "aspectName": "upstreamLineage",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)-upstreamLineage"
+  },
+  {
+    "aspect": {
+      "path": [
+        {
+          "id": "urn:li:container:infobase:1c-test:PROD",
+          "urn": "urn:li:container:infobase:1c-test:PROD"
+        },
+        {
+          "id": "urn:li:container:1c-test:Documents:PROD",
+          "urn": "urn:li:container:1c-test:Documents:PROD"
+        },
+        {
+          "id": "urn:li:container:1c-test:11111111-1111-1111-1111-111111111103:PROD",
+          "urn": "urn:li:container:1c-test:11111111-1111-1111-1111-111111111103:PROD"
+        }
+      ]
+    },
+    "aspectName": "browsePathsV2",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)-browsePathsV2"
+  },
+  {
+    "aspect": {
+      "container": "urn:li:container:1c-test:11111111-1111-1111-1111-111111111103:PROD"
+    },
+    "aspectName": "container",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)-container"
+  },
+  {
+    "aspect": {
+      "customProperties": {
+        "canonicalFullName": "Document.ЗаказКлиента.Товары",
+        "infobaseName": "1c-test",
+        "metadataKind": "TabularSection",
+        "metadataKindLabel": "ТабличнаяЧасть",
+        "metadataUuid": "44444444-4444-4444-4444-444444444402",
+        "parentObjectUuid": "11111111-1111-1111-1111-111111111103",
+        "transliteratedName": "Document.ZakazKlienta.Tovary"
+      },
+      "name": "Документ.ЗаказКлиента.Товары",
+      "qualifiedName": "Документ.ЗаказКлиента.Товары",
+      "tags": []
+    },
+    "aspectName": "datasetProperties",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)-datasetProperties"
+  },
+  {
+    "aspect": {
+      "attributeColumns": [
+        {
+          "attributeFieldPath": "Nomenklatura",
+          "attributeName": "Номенклатура",
+          "columnRole": "value",
+          "dbColumnName": "_fld51558rref"
+        }
+      ],
+      "dbTableName": "_document164_vt51557"
+    },
+    "aspectName": "oneCDbMapping",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)-oneCDbMapping"
+  },
+  {
+    "aspect": {
+      "isTabularPartOf": [
+        "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)"
+      ],
+      "mapsToDbTable": [
+        "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164_vt51557,PROD)"
+      ],
+      "refersToObject": [
+        "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)"
+      ]
+    },
+    "aspectName": "oneCDomainRelationships",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)-oneCDomainRelationships"
+  },
+  {
+    "aspect": {
+      "configurationName": "1c-test",
+      "fullName": "Документ.ЗаказКлиента.Товары",
+      "metadataUuid": "44444444-4444-4444-4444-444444444402",
+      "objectKind": "ТабличнаяЧасть",
+      "parentObjectUuid": "11111111-1111-1111-1111-111111111103"
+    },
+    "aspectName": "oneCObjectProperties",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)-oneCObjectProperties"
+  },
+  {
+    "aspect": {
+      "created": {
+        "actor": "urn:li:corpuser:unknown",
+        "time": 0
+      },
+      "fields": [
+        {
+          "description": "Уникальная ссылка объекта (GUID).",
+          "fieldPath": "Ref",
+          "isPartOfKey": true,
+          "label": "Ссылка",
+          "nativeDataType": "УникальныйИдентификатор",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.StringType": {}
+            }
+          }
+        },
+        {
+          "description": "Порядковый номер строки табличной части или записи регистра.",
+          "fieldPath": "LineNumber",
+          "isPartOfKey": true,
+          "label": "НомерСтроки",
+          "nativeDataType": "Число",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.NumberType": {}
+            }
+          }
+        },
+        {
+          "description": "Номенклатура",
+          "fieldPath": "Nomenklatura",
+          "isPartOfKey": false,
+          "label": "Номенклатура",
+          "nativeDataType": "Catalog.Номенклатура",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.RecordType": {}
+            }
+          }
+        },
+        {
+          "description": "Количество",
+          "fieldPath": "Kolichestvo",
+          "isPartOfKey": false,
+          "label": "Количество",
+          "nativeDataType": "Число",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.NumberType": {}
+            }
+          }
+        }
+      ],
+      "foreignKeys": [
+        {
+          "foreignDataset": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)",
+          "foreignFields": [
+            "urn:li:schemaField:(urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD),Ref)"
+          ],
+          "name": "FK_Ref_to_Parent",
+          "sourceFields": [
+            "urn:li:schemaField:(urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD),Ref)"
+          ]
+        }
+      ],
+      "hash": "",
+      "lastModified": {
+        "actor": "urn:li:corpuser:unknown",
+        "time": 0
+      },
+      "platform": "urn:li:dataPlatform:1c-enterprise",
+      "platformSchema": {
+        "com.linkedin.schema.OtherSchema": {
+          "rawSchema": ""
+        }
+      },
+      "primaryKeys": [
+        "Ref",
+        "LineNumber"
+      ],
+      "schemaName": "Документ.ЗаказКлиента.Товары",
+      "version": 0
+    },
+    "aspectName": "schemaMetadata",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)-schemaMetadata"
+  },
+  {
+    "aspect": {
+      "primary": true,
+      "siblings": [
+        "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164_vt51557,PROD)"
+      ]
+    },
+    "aspectName": "siblings",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)-siblings"
+  },
+  {
+    "aspect": {
+      "typeNames": [
+        "Tabular Section"
+      ]
+    },
+    "aspectName": "subTypes",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)-subTypes"
+  },
+  {
+    "aspect": {
+      "path": [
+        {
+          "id": "urn:li:container:infobase:1c-test:PROD",
+          "urn": "urn:li:container:infobase:1c-test:PROD"
+        },
+        {
+          "id": "urn:li:container:1c-test:Catalogs:PROD",
+          "urn": "urn:li:container:1c-test:Catalogs:PROD"
+        }
+      ]
+    },
+    "aspectName": "browsePathsV2",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)-browsePathsV2"
+  },
+  {
+    "aspect": {
+      "container": "urn:li:container:1c-test:Catalogs:PROD"
+    },
+    "aspectName": "container",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)-container"
+  },
+  {
+    "aspect": {
+      "customProperties": {
+        "canonicalFullName": "Catalog.Номенклатура",
+        "infobaseName": "1c-test",
+        "metadataKind": "Catalog",
+        "metadataKindLabel": "Справочник",
+        "metadataUuid": "22222222-2222-2222-2222-222222222201",
+        "transliteratedName": "Catalog.Nomenklatura"
+      },
+      "name": "Справочник.Номенклатура",
+      "qualifiedName": "Справочник.Номенклатура",
+      "tags": []
+    },
+    "aspectName": "datasetProperties",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)-datasetProperties"
+  },
+  {
+    "aspect": {
+      "isHierarchical": true,
+      "ownerNames": [
+        "Контрагенты"
+      ]
+    },
+    "aspectName": "oneCCatalogProperties",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)-oneCCatalogProperties"
+  },
+  {
+    "aspect": {
+      "isReferencedByObject": [
+        "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)",
+        "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)"
+      ],
+      "mapsToDbTable": [
+        "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._reference42,PROD)"
+      ]
+    },
+    "aspectName": "oneCDomainRelationships",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)-oneCDomainRelationships"
+  },
+  {
+    "aspect": {
+      "attributesUuidMap": {
+        "Artikul": "55555555-5555-5555-5555-555555555501"
+      },
+      "configurationName": "1c-test",
+      "fullName": "Справочник.Номенклатура",
+      "metadataUuid": "22222222-2222-2222-2222-222222222201",
+      "objectKind": "Справочник"
+    },
+    "aspectName": "oneCObjectProperties",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)-oneCObjectProperties"
+  },
+  {
+    "aspect": {
+      "created": {
+        "actor": "urn:li:corpuser:unknown",
+        "time": 0
+      },
+      "fields": [
+        {
+          "description": "Уникальная ссылка объекта (GUID).",
+          "fieldPath": "Ref",
+          "isPartOfKey": true,
+          "label": "Ссылка",
+          "nativeDataType": "УникальныйИдентификатор",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.StringType": {}
+            }
+          }
+        },
+        {
+          "description": "Код элемента справочника.",
+          "fieldPath": "Code",
+          "isPartOfKey": false,
+          "label": "Код",
+          "nativeDataType": "Строка",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.StringType": {}
+            }
+          }
+        },
+        {
+          "description": "Наименование элемента.",
+          "fieldPath": "Description",
+          "isPartOfKey": false,
+          "label": "Наименование",
+          "nativeDataType": "Строка",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.StringType": {}
+            }
+          }
+        },
+        {
+          "description": "Признак логического удаления.",
+          "fieldPath": "DeletionMark",
+          "isPartOfKey": false,
+          "label": "ПометкаУдаления",
+          "nativeDataType": "Булево",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.BooleanType": {}
+            }
+          }
+        },
+        {
+          "description": "Признак предопределённого элемента конфигурации.",
+          "fieldPath": "Predefined",
+          "isPartOfKey": false,
+          "label": "Предопределённый",
+          "nativeDataType": "Булево",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.BooleanType": {}
+            }
+          }
+        },
+        {
+          "description": "Ссылка на родителя в иерархии справочника.",
+          "fieldPath": "Parent",
+          "isPartOfKey": false,
+          "label": "Родитель",
+          "nativeDataType": "СправочникСсылка",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.StringType": {}
+            }
+          }
+        },
+        {
+          "description": "Ссылка на владельца подчинённого справочника.",
+          "fieldPath": "Owner",
+          "isPartOfKey": false,
+          "label": "Владелец",
+          "nativeDataType": "СправочникСсылка",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.StringType": {}
+            }
+          }
+        },
+        {
+          "description": "Признак группы (для иерархии «группы и элементы»).",
+          "fieldPath": "IsFolder",
+          "isPartOfKey": false,
+          "label": "ЭтоГруппа",
+          "nativeDataType": "Булево",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.BooleanType": {}
+            }
+          }
+        },
+        {
+          "description": "Артикул",
+          "fieldPath": "Artikul",
+          "isPartOfKey": false,
+          "label": "Артикул",
+          "nativeDataType": "Строка",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.StringType": {}
+            }
+          }
+        }
+      ],
+      "hash": "",
+      "lastModified": {
+        "actor": "urn:li:corpuser:unknown",
+        "time": 0
+      },
+      "platform": "urn:li:dataPlatform:1c-enterprise",
+      "platformSchema": {
+        "com.linkedin.schema.OtherSchema": {
+          "rawSchema": ""
+        }
+      },
+      "primaryKeys": [
+        "Ref"
+      ],
+      "schemaName": "Catalog.Nomenklatura",
+      "version": 0
+    },
+    "aspectName": "schemaMetadata",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)-schemaMetadata"
+  },
+  {
+    "aspect": {
+      "primary": true,
+      "siblings": [
+        "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._reference42,PROD)"
+      ]
+    },
+    "aspectName": "siblings",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)-siblings"
+  },
+  {
+    "aspect": {
+      "typeNames": [
+        "Catalog"
+      ]
+    },
+    "aspectName": "subTypes",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)-subTypes"
+  },
+  {
+    "aspect": {
+      "path": [
+        {
+          "id": "urn:li:container:infobase:1c-test:PROD",
+          "urn": "urn:li:container:infobase:1c-test:PROD"
+        },
+        {
+          "id": "urn:li:container:1c-test:AccumulationRegisters:PROD",
+          "urn": "urn:li:container:1c-test:AccumulationRegisters:PROD"
+        }
+      ]
+    },
+    "aspectName": "browsePathsV2",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)-browsePathsV2"
+  },
+  {
+    "aspect": {
+      "container": "urn:li:container:1c-test:AccumulationRegisters:PROD"
+    },
+    "aspectName": "container",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)-container"
+  },
+  {
+    "aspect": {
+      "customProperties": {
+        "canonicalFullName": "AccumulationRegister.ОстаткиТоваров",
+        "infobaseName": "1c-test",
+        "metadataKind": "AccumulationRegister",
+        "metadataKindLabel": "РегистрНакопления",
+        "metadataUuid": "33333333-3333-3333-3333-333333333302",
+        "transliteratedName": "AccumulationRegister.OstatkiTovarov"
+      },
+      "name": "РегистрНакопления.ОстаткиТоваров",
+      "qualifiedName": "РегистрНакопления.ОстаткиТоваров",
+      "tags": []
+    },
+    "aspectName": "datasetProperties",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)-datasetProperties"
+  },
+  {
+    "aspect": {
+      "mapsToDbTable": [
+        "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._accumrg165,PROD)"
+      ]
+    },
+    "aspectName": "oneCDomainRelationships",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)-oneCDomainRelationships"
+  },
+  {
+    "aspect": {
+      "configurationName": "1c-test",
+      "fullName": "РегистрНакопления.ОстаткиТоваров",
+      "metadataUuid": "33333333-3333-3333-3333-333333333302",
+      "objectKind": "РегистрНакопления"
+    },
+    "aspectName": "oneCObjectProperties",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)-oneCObjectProperties"
+  },
+  {
+    "aspect": {
+      "registerKind": "Accumulation",
+      "totalsEnabled": true
+    },
+    "aspectName": "oneCRegisterProperties",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)-oneCRegisterProperties"
+  },
+  {
+    "aspect": {
+      "created": {
+        "actor": "urn:li:corpuser:unknown",
+        "time": 0
+      },
+      "fields": [
+        {
+          "description": "Период записи регистра.",
+          "fieldPath": "Period",
+          "isPartOfKey": true,
+          "label": "Период",
+          "nativeDataType": "Дата",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.DateType": {}
+            }
+          }
+        },
+        {
+          "description": "Документ-регистратор, сформировавший запись регистра.",
+          "fieldPath": "Recorder",
+          "isPartOfKey": true,
+          "label": "Регистратор",
+          "nativeDataType": "ДокументСсылка",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.StringType": {}
+            }
+          }
+        },
+        {
+          "description": "Порядковый номер строки табличной части или записи регистра.",
+          "fieldPath": "LineNumber",
+          "isPartOfKey": true,
+          "label": "НомерСтроки",
+          "nativeDataType": "Число",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.NumberType": {}
+            }
+          }
+        },
+        {
+          "description": "Признак активности записи регистра.",
+          "fieldPath": "Active",
+          "isPartOfKey": false,
+          "label": "Активность",
+          "nativeDataType": "Булево",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.BooleanType": {}
+            }
+          }
+        },
+        {
+          "description": "Вид движения регистра накопления (приход/расход).",
+          "fieldPath": "RecordType",
+          "isPartOfKey": false,
+          "label": "ВидДвижения",
+          "nativeDataType": "ВидДвиженияНакопления",
+          "nullable": false,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.StringType": {}
+            }
+          }
+        }
+      ],
+      "hash": "",
+      "lastModified": {
+        "actor": "urn:li:corpuser:unknown",
+        "time": 0
+      },
+      "platform": "urn:li:dataPlatform:1c-enterprise",
+      "platformSchema": {
+        "com.linkedin.schema.OtherSchema": {
+          "rawSchema": ""
+        }
+      },
+      "primaryKeys": [
+        "Period",
+        "Recorder",
+        "LineNumber"
+      ],
+      "schemaName": "AccumulationRegister.OstatkiTovarov",
+      "version": 0
+    },
+    "aspectName": "schemaMetadata",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)-schemaMetadata"
+  },
+  {
+    "aspect": {
+      "primary": true,
+      "siblings": [
+        "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._accumrg165,PROD)"
+      ]
+    },
+    "aspectName": "siblings",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)-siblings"
+  },
+  {
+    "aspect": {
+      "typeNames": [
+        "Accumulation Register"
+      ]
+    },
+    "aspectName": "subTypes",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)-subTypes"
+  },
+  {
+    "aspect": {
+      "customProperties": {
+        "table_purpose": "Main"
+      },
+      "name": "_accumrg165",
+      "qualifiedName": "1c-test.public._accumrg165",
+      "tags": []
+    },
+    "aspectName": "datasetProperties",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._accumrg165,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._accumrg165,PROD)-datasetProperties"
+  },
+  {
+    "aspect": {
+      "primary": false,
+      "siblings": [
+        "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.33333333-3333-3333-3333-333333333302,PROD)"
+      ]
+    },
+    "aspectName": "siblings",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._accumrg165,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._accumrg165,PROD)-siblings"
+  },
+  {
+    "aspect": {
+      "typeNames": [
+        "Table"
+      ]
+    },
+    "aspectName": "subTypes",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._accumrg165,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._accumrg165,PROD)-subTypes"
+  },
+  {
+    "aspect": {
+      "customProperties": {
+        "table_purpose": "Totals"
+      },
+      "name": "_accumrgt166",
+      "qualifiedName": "1c-test.public._accumrgt166",
+      "tags": []
+    },
+    "aspectName": "datasetProperties",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._accumrgt166,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._accumrgt166,PROD)-datasetProperties"
+  },
+  {
+    "aspect": {
+      "typeNames": [
+        "Table"
+      ]
+    },
+    "aspectName": "subTypes",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._accumrgt166,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._accumrgt166,PROD)-subTypes"
+  },
+  {
+    "aspect": {
+      "customProperties": {
+        "table_purpose": "Main"
+      },
+      "name": "_document164",
+      "qualifiedName": "1c-test.public._document164",
+      "tags": []
+    },
+    "aspectName": "datasetProperties",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164,PROD)-datasetProperties"
+  },
+  {
+    "aspect": {
+      "created": {
+        "actor": "urn:li:corpuser:unknown",
+        "time": 0
+      },
+      "fields": [
+        {
+          "fieldPath": "_number",
+          "isPartOfKey": false,
+          "nativeDataType": "unknown",
+          "nullable": true,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.StringType": {}
+            }
+          }
+        }
+      ],
+      "hash": "",
+      "lastModified": {
+        "actor": "urn:li:corpuser:unknown",
+        "time": 0
+      },
+      "platform": "urn:li:dataPlatform:postgres",
+      "platformSchema": {
+        "com.linkedin.schema.OtherSchema": {
+          "rawSchema": ""
+        }
+      },
+      "schemaName": "_document164",
+      "version": 0
+    },
+    "aspectName": "schemaMetadata",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164,PROD)-schemaMetadata"
+  },
+  {
+    "aspect": {
+      "primary": false,
+      "siblings": [
+        "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103,PROD)"
+      ]
+    },
+    "aspectName": "siblings",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164,PROD)-siblings"
+  },
+  {
+    "aspect": {
+      "typeNames": [
+        "Table"
+      ]
+    },
+    "aspectName": "subTypes",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164,PROD)-subTypes"
+  },
+  {
+    "aspect": {
+      "customProperties": {
+        "table_purpose": "TabularSection",
+        "tabular_section_name": "Товары"
+      },
+      "name": "_document164_vt51557",
+      "qualifiedName": "1c-test.public._document164_vt51557",
+      "tags": []
+    },
+    "aspectName": "datasetProperties",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164_vt51557,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164_vt51557,PROD)-datasetProperties"
+  },
+  {
+    "aspect": {
+      "created": {
+        "actor": "urn:li:corpuser:unknown",
+        "time": 0
+      },
+      "fields": [
+        {
+          "fieldPath": "_fld51558rref",
+          "isPartOfKey": false,
+          "nativeDataType": "unknown",
+          "nullable": true,
+          "recursive": false,
+          "type": {
+            "type": {
+              "com.linkedin.schema.StringType": {}
+            }
+          }
+        }
+      ],
+      "hash": "",
+      "lastModified": {
+        "actor": "urn:li:corpuser:unknown",
+        "time": 0
+      },
+      "platform": "urn:li:dataPlatform:postgres",
+      "platformSchema": {
+        "com.linkedin.schema.OtherSchema": {
+          "rawSchema": ""
+        }
+      },
+      "schemaName": "_document164_vt51557",
+      "version": 0
+    },
+    "aspectName": "schemaMetadata",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164_vt51557,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164_vt51557,PROD)-schemaMetadata"
+  },
+  {
+    "aspect": {
+      "primary": false,
+      "siblings": [
+        "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.11111111-1111-1111-1111-111111111103.44444444-4444-4444-4444-444444444402,PROD)"
+      ]
+    },
+    "aspectName": "siblings",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164_vt51557,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164_vt51557,PROD)-siblings"
+  },
+  {
+    "aspect": {
+      "typeNames": [
+        "Table"
+      ]
+    },
+    "aspectName": "subTypes",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164_vt51557,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._document164_vt51557,PROD)-subTypes"
+  },
+  {
+    "aspect": {
+      "customProperties": {
+        "table_purpose": "Main"
+      },
+      "name": "_reference42",
+      "qualifiedName": "1c-test.public._reference42",
+      "tags": []
+    },
+    "aspectName": "datasetProperties",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._reference42,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._reference42,PROD)-datasetProperties"
+  },
+  {
+    "aspect": {
+      "primary": false,
+      "siblings": [
+        "urn:li:dataset:(urn:li:dataPlatform:1c-enterprise,1c-test.22222222-2222-2222-2222-222222222201,PROD)"
+      ]
+    },
+    "aspectName": "siblings",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._reference42,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._reference42,PROD)-siblings"
+  },
+  {
+    "aspect": {
+      "typeNames": [
+        "Table"
+      ]
+    },
+    "aspectName": "subTypes",
+    "entityType": "dataset",
+    "entityUrn": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._reference42,PROD)",
+    "id": "urn:li:dataset:(urn:li:dataPlatform:postgres,1c-test.public._reference42,PROD)-subTypes"
+  }
+]
